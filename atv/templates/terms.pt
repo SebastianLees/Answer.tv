@@ -1,0 +1,122 @@
+<metal:main use-macro="load: base2.pt">
+<div metal:fill-slot="title"><title>Terms of service - answer.tv</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content="Terms of service for answer.tv"/>
+</div>
+<div metal:fill-slot="body">
+  <body style="background-color:#eeeff4; fixed top left;" >
+</div>
+<div metal:fill-slot="content">
+	<div id="content" class="container-fluid well span12" style="margin:0 auto; float:none; margin-bottom:8px;">
+		<div style="padding-left:10px; padding-right:10px">
+			<h2 style="color: #66757F; margin: 15px 0px 0px 0px; font-size: 22px; font-weight: 300; line-height: 22px;">Terms of Service</h2>
+			<br>
+			<p>Last revision date: 23rd December 2013</p>
+			<br>
+			<p>All services provided by http://www.answer.tv ("answer.tv") may be used for lawful purposes only.
+			Transmission, storage or presentation of any information, data or material in violation of any
+			International, United States federal, State or City law is prohibited. This includes, but is not
+			limited to: copyrighted material, material we judge to be threatening or obscene, or material
+			protected by trade secret and other statute. The subscriber agrees to indemnify and hold harmless
+			answer.tv from any claims resulting from the use of service which damages the subscriber or any
+			other party.</p>
+
+			<p>Prohibited sites include but are not limited to any that promote any illegal activity or present
+			content that may be damaging to answer.tv's servers, or any other server on the Internet. Links
+			to such materials are also prohibited.</p>
+			<br>
+			<p><b>Examples of unacceptable content or links:</b></p>
+			<br>
+			<p>Pirated software, hacker programs or archives, warez sites, material of a pornographic nature,
+			material under copyright.</p>
+
+			<p>NOTICE: IF YOUR ACCOUNT IS FOUND TO CONTAIN ILLEGAL ACTIVITY, ILLEGAL MP3 FILES, PIRATED SOFTWARE,
+			HACKER PROGRAMS, WAREZ PROGRAMS, COPYRIGHT MATERIAL OR ANY OTHER ILLEGAL FILES, YOUR ACCOUNT WILL
+			BE TERMINATED IMMEDIATELY, WITHOUT NOTICE, AND AN ADMINISTRATION FEE MAY APPLY. ADDITIONALLY, answer.tv
+			WILL NOTIFY THE PROPER AUTHORITIES OF YOUR ACTIONS WHEN NECESSARY.</p>
+			<br>
+			<p><b>Copyright, Content Creation and Uploading Content</b></p>
+			<br>
+			<p>By creating and/or uploading any content to answer.tv you agree to do so under the Creative Commons
+			Attribution 3.0 license. You can read this license in full <a href="http://creativecommons.org/licenses/by/3.0/">here</a>. Furthermore you consent that under the
+			terms of this license and answer.tv attribution will consist of the username provided to us at
+			account registration.</p>
+			<br>
+			<p><b>Server Abuse</b></p>
+			<br>
+			<p>Any attempt to undermine or cause harm to a server or any other infrastructure of answer.tv is strictly
+			prohibited. As our user you are responsible for all your accounts. Should you violate the Terms of Services
+			outlined within, your account will be cancelled.</p>
+			<br>
+			<p><b>Refusal of Service</b></p>
+			<br>
+			<p>We reserve the right to refuse, cancel or suspend service, at our sole discretion. all sub-networks, distributive
+			hosting sites and dedicated servers of answer.tv must adhere to the above policies, with the exception of system
+			resources in respect to dedicated servers.</p>
+			<br>
+			<p><b>Limitation of Liability</b></p>
+			<br>
+			<p>Answer.tv shall not be responsible for any claimed damages, including incidental and consequential damages, which
+			may arise from answer.tv's servers going off-line or being unavailable for any reason whatsoever. Furthermore,
+			answer.tv shall not be responsible for any claimed damages, including incidental or consequential damages, resulting
+			from the corruption or deletion of any content from one of answer.tv 's servers. All damages shall be limited to the
+			immediate termination of service.</p>
+			<br>
+			<p><b>Violations</b></p>
+			<br>
+			<p>To report violations of these Acceptable Use Policies please <a href="/contact">contact us</a>. All complaints will be investigated
+			promptly. Failure to follow any term or condition will be grounds for immediate account deactivation</p>
+			<br>
+			<p><b>Disclaimer</b></p>
+			<br>
+			<p>Answer.tv cannot be held liable for system down time, crashes or data loss. We cannot be held liable for any predicated
+			estimate of profits which a client would have gained if their site was functioning. Certain services provided to answer.tv
+			may be resold in future. Thus, certain equipment, routing, software and programming used by answer.tv are not directly
+			owned or written by answer.tv. Moreover, answer.tv holds no responsibility for the use of our clients' accounts. Failure
+			to comply with any terms or conditions will result in the automatic deactivation of the account in question. We reserve
+			the right to remove any account, without advance notice for any reason without restitution, as answer.tv sees fit.</p>
+			<br>
+			<p><b>Account Activation</b></p>
+			<br>
+			<p>By activating your account with answer.tv, you agree to the above policies and disclaimer. Upon requesting activation
+			of an account, you are required to accept these policies, guidelines and disclaimer, and a copy of your acceptance is
+			forwarded along with your activation request to be maintained with your account information.</p>
+
+			<p>NOTICE: If you sign up for an account and fail to comply with these terms we may or may not advise you by e-mail or
+			phone prior to taking any action to provide you with an opportunity to correct the problem.</p>
+
+			<p>Answer.tv reserves the right to amend any or all of the above policies, guidelines and disclaimer without notification.
+			We also retain the right to make changes to our site and account plans without notification.</p>
+			<br>			
+		</div>
+	</div>
+  <div class="footer-static-page">
+    <div class="container">
+      <div class="row">
+        <div class="span10">
+          <div class="footer-links">
+            <span> </span>
+            <a href="/help">Help</a>
+            <a href="/blog">Blog</a>
+            <a href="/copyright">Copyright & Content</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/contact">Contact Us</a>
+          </div>
+          <div class="footer-disclaimer">&copy; 2013 answer.tv all rights reserved. Use of this site constitutes acceptance of our Privacy Policy and Terms of Service.</div>
+        </div>
+        <div class="span2 text-center footer-social-links" style="margin-top:3px;">
+          <div>
+            <a href="http://www.facebook.com/answertv" style="text-decoration:none;">
+              <img src="${request.static_url('atv:static/img/facebookfooter.png')}">
+								</a>
+            <a href="http://twitter.com/answerdottv" style="margin-left:13px; text-decoration:none;">
+              <img src="${request.static_url('atv:static/img/twitterfooter.png')}">
+								</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</metal:main>

@@ -1,0 +1,114 @@
+<metal:main use-macro="load: base2.pt">
+<div metal:fill-slot="title"><title>Admin - answer.tv</title>
+</div>
+<div metal:fill-slot="body">
+  <body style="background-color:#eeeff4; fixed top left;" >
+</div>
+<div metal:fill-slot="description"><meta name="description" content="Admin."/>
+</div>
+<div metal:fill-slot="content">
+	<div id="content" class="container-fluid well span12" style="margin:0 auto; float:none; margin-bottom:8px;">
+		<div style="padding-left:10px; padding-right:10px">
+			<h3 class="privpol">Overview</h3>
+			<p><h6>No. of Channels: ${nochannels}</h6></p>
+			<p><h6>No. of Questions: ${noquestions}</h6></p>
+			<p><h6>No. of Answers: ${noanswers}</h6></p>
+			<hr>
+			<h5 class="privpol"><u>Latest members</u></h5>
+			<div tal:repeat="row latestusers">
+			<p><h6><a href="http://www.answer.tv/${row.username}">${row.username}</a></h6></p>
+			</div>
+			<hr>
+			<h5 class="privpol"><u>Question / Answer</u></h5>
+		            		<div class="ask-a-question">
+		                		<div>
+		                    		<textarea type="text" rows="2" class="form-control" style="width:90%;" id="question" name="question" placeholder="Question" maxlength="185" required></textarea>
+		                		</div>
+		                		<div class="ask-a-question">
+		                    		<textarea class="form-control" rows="7" style="width:90%;" id="questiontext" name="questiontext" placeholder="Additional text (optional)" maxlength="4500"></textarea>
+		                		</div>
+		               			<div class="ask-a-question">
+		                    		<textarea class="form-control" rows="1" style="width:90%;" id="questionchannel" name="questionchannel" placeholder="Channel" maxlength="4500"></textarea>
+		                		</div>
+		                		<div class="ask-a-question">
+		                    		<textarea class="form-control" rows="1" style="width:90%;" id="youtubeanswer" name="youtubeanswer" placeholder="Youtube Answer" maxlength="4500"></textarea>
+		                		</div>
+		      
+								<p style="text-align:center; margin: 10px 40px 10px 0px;">
+								<button value="ask" id="askbuttoncheat" style="width:130px; margin: 0px auto; float:none; font-size:22px; padding: 10px 25px 10px 25px;" class="btn btn-success btn-large askbuttoncheat" role="button"><i class="icon-comment"></i>  ask</button>
+								<p>
+								<p align="center" id="errormessage" style="height:15px; color:red;">
+								</p>
+		            		</div>
+		</div>
+	</div>
+	<!-- Question Asked Modal -->
+			<div class="modal fade" id="QaskedModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display:block;">
+				<div class="modal-dialog">
+					<div class="modal-content" style="height:35px;">
+							<h4 align="center" class="modal-title" id="myModalLabel" style="color: #08c; display:block; margin-left:20px; font-size: 18px; font-weight: 300; line-height: 22px;"><i class="icon-comments questionboxover"></i> Your question has been posted</h4>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div>
+			<!-- /.Question Asked modal -->	
+	<script>
+//Ask Question & Answer
+$('button.askbuttoncheat').live('click', function(e){
+	e.preventDefault();
+	var question = $('textarea#question').val();
+	var questiontext = $('textarea#questiontext').val();
+	var channel = $('textarea#questionchannel').val();
+	var answer = $('textarea#youtubeanswer').val();
+	if(question.length < 8) {
+		$('#errormessage').text("Please enter a question longer than 8 characters.");
+							} 
+	else {
+	    var url = window.location.pathname; 
+		$('#askModal').modal('toggle');
+		$.post("${request.application_url}/admin",
+			{
+			question: question,
+			questiontext: questiontext,
+			channel: channel,
+			answer: answer,
+			});
+		$('#errormessage').text("");
+			setTimeout(
+				function() 
+					{
+					$('#QaskedModal').modal('toggle');
+					refreshQuestionContainer(url);
+					}, 1000);
+				}
+				});
+	</script>
+  <div class="footer-static-page">
+    <div class="container">
+      <div class="row">
+        <div class="span10">
+          <div class="footer-links">
+            <span> </span>
+            <a href="/help">Help</a>
+            <a href="/blog">Blog</a>
+            <a href="/copyright">Copyright & Content</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/contact">Contact Us</a>
+          </div>
+          <div class="footer-disclaimer">&copy; 2013 answer.tv all rights reserved. Use of this site constitutes acceptance of our Privacy Policy and Terms of Service.</div>
+        </div>
+        <div class="span2 text-center footer-social-links" style="margin-top:3px;">
+          <div>
+            <a href="http://www.facebook.com/answertv" style="text-decoration:none;">
+              <img src="${request.static_url('atv:static/img/facebookfooter.png')}">
+								</a>
+            <a href="http://twitter.com/answerdottv" style="margin-left:13px; text-decoration:none;">
+              <img src="${request.static_url('atv:static/img/twitterfooter.png')}">
+								</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</metal:main>

@@ -1,0 +1,32 @@
+<metal:main use-macro="load: base2.pt">
+<div metal:fill-slot="title"><title>Reset password | Answer.tv</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content="Reset your Answer.tv password."/>
+</div>
+<div metal:fill-slot="body">
+  <body style="background-color:#eeeff4; fixed top left;" >
+</div>
+<div metal:fill-slot="content">
+<br>
+	<div class="container span6" style="margin:0 auto; float:none;">
+		<h3 style="font-weight:normal; text-align:center;">Change password</h3>
+		<div style="min-height:25px;">
+			<h6 style="font-weight:normal; text-align:center; margin: 0px 0px; color:red;"><span tal:replace="status"/></h6>
+			<br>
+		</div>
+		<div class="container span3" style="margin:0 auto; float:none;">
+			<div class="row">
+				<div class="main">
+					<form action="${request.application_url}/reset/${code}" method="post">
+						<div class="form-group">
+							<label form="inputUsernameEmail">New password</label>
+							<input type="password" class="form-control" id="inputPassword" name="password" value="" style="width:100%;" required/>
+						</div>
+						<button type="submit" name="form.submitted" class="btn btn btn-info" style="margin: 10px 0px; padding:10px 0px; style="width:100%; font-size:18px;">Change password</button>
+					</form>
+				</div> 
+			</div>
+		</div>
+	</div>
+</div>
+</metal:main>

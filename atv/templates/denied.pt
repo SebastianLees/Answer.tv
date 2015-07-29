@@ -1,0 +1,20 @@
+<metal:main use-macro="load: base2.pt">
+<div metal:fill-slot="title"><title>Denied - Channel is Private | answer.tv</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content="Denied - Channel is Private."/>
+</div>
+<div metal:fill-slot="body">
+  <body style="background-color:#eeeff4; fixed top left;" >
+</div>
+<div metal:fill-slot="content">
+	<div class="container-fluid span9" style="margin:0 auto; float:none;">
+	<br>
+	<p><h3>Private</h3><p>
+	<br>
+	<p><img src="${request.static_url('atv:static/img/testcard.png')}" border="0"></p>
+	<br>
+	<p><h5 style="font-weight:normal;">The owner of this channel has set it to private. Only users being followed by this channel may view it.</h5></p>	
+	</div>
+  
+</div>
+</metal:main> 

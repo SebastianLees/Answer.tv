@@ -1,0 +1,403 @@
+<metal:main use-macro="load: base.pt">
+<div metal:fill-slot="title"><title>${questionname.Question.questionmain}</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content="${questionname.Question.questionmain} - ${questionname.Question.questiontext}"/>
+</div>
+<div metal:fill-slot="body">
+  <body style="background-color:#eeeff4;">
+</div>
+  <div metal:fill-slot="content">
+    <style>
+  	#Video {
+    	outline: 0 !important;
+		}
+	</style>
+	 <script>
+	 //Upvote callback
+	 var callback = function(data) {
+				    $.ajax({
+				        url: '${request.application_url}/vote',
+				        type: 'post',
+				        data: {id: data.id, upvote: data.upvoted, downvote: data.downvoted}
+				    });
+					};       
+	</script>
+    <div class="container-fluid well span12" id="miniheader" style="position:fixed; z-index:10; margin:0 auto; float:none; margin-top:-15px; padding: 0px 0px 0px 0px;">
+      <div class="container span12" style="height:55px; margin:0 auto; float:none;">
+        <div>
+          <ul style="list-style-type: none; margin: 0px 0px 0px 0px; padding-bottom:5px;">
+            <li style="float:left;">
+              <div style="width:230px;">
+                <img src="${request.static_url('atv:static/minipermbks/')}${channelname.Images.backgroundpic}" width="230px" height="55px" style="padding:0px; border-right: 1px solid #E1E8ED; margin:0px 0px 0px 0px; float:left;">
+            </div>
+            </li>
+            <li style="float:left; margin-left:5px;width:245px;">
+              <img src="${request.static_url('atv:static/profileimg/')}${channelname.Images.profilepic}" width="35px" height="35px" style="margin:14px 5px 0px 5px; float:left; border-radius: 3px;">
+                <h5 style="line-height:22px; font-weight:strong; margin:10px 10px 0px 0px; font-family: Gotham Narrow SSm, sans-serif;">${channelname.Channel.name}</h5>
+                <span style="margin:0px 0px 0px 0px;">
+                  <a href="${request.application_url}/${channelname.Channel.usralias}" class="underlying">(${channelname.Channel.username})</a>
+                </span>
+              </li>
+            <li style="float:left; width:90px; border-left: 1px solid #E1E8ED; border-right: 1px solid #E1E8ED; height:55px;">
+              <p title="Followers" style="font-size:10px; color: #1F1F1F; margin:7px 0px 0px 7px;">
+                Followers
+              </p>
+              <p style="font-size:18px; color: #1F1F1F; margin:0px 0px 0px 7px;">
+                <i class="icon-heart-empty" style="margin-right:5px; color: #FF0D0D" title="followers"></i>${channelname.Channel.subscribers}
+              </p>
+            </li>
+            <li style="float:left; width:90px; border-right: 1px solid #E1E8ED; height:55px;">
+              <p title="Question Karma" style="font-size:10px; color: #1F1F1F; margin:7px 0px 0px 7px;">
+                Question Karma
+              </p>
+              <p style="font-size:18px; color: #1F1F1F; margin:0px 0px 0px 7px;">
+                <i class="icon-star" style="margin-right:5px; color: #FFF70D;" title="question karma"></i>${channelname.Channel.qkarma}
+              </p>
+            </li>
+            <li style="float:left; width:90px; border-right: 1px solid #E1E8ED; height:55px;">
+              <p title="Answer Karma" style="font-size:10px; color: #1F1F1F; margin:7px 0px 0px 7px;">
+                Answer Karma
+              </p>
+              <p style="font-size:18px; color: #1F1F1F; margin:0px 0px 0px 7px;">
+                <i class="icon-star-empty" style="margin-right:5px; color: #FFF70D;" title="answer karma"></i>${channelname.Channel.akarma}
+              </p>
+            </li>
+          </ul>
+          <tal:if condition="not: logged_in">
+            <a class="btn btn-success" style="width: 60px; margin: 10px 0px 0px 5px;" data-toggle="modal" data-target="#signInModal">
+              <i class="icon-white icon-comment"></i> ask
+            </a>
+          </tal:if>
+          <tal:if condition="logged_in">
+            <tal:if condition="not:canAsk">
+              <a class="btn btn-success" style="width: 60px; margin: 10px 0px 0px 5px;" data-toggle="modal" data-target="#forbiddenModal">
+                <i class="icon-white icon-comment"></i>
+                ask
+              </a>
+            </tal:if>
+            <tal:if condition="canAsk">
+              <a class="btn btn-success" style="width: 60px; margin: 10px 0px 0px 5px;" data-toggle="modal" data-target="#askModal">
+                <i class="icon-white icon-comment"></i>
+                ask
+              </a>
+            </tal:if>
+          </tal:if>
+          <tal:if condition="not: logged_in">
+            <button class="btn btn-info" style="width:85px; margin: 10px 0px 0px 0px;" data-toggle="modal" data-target="#signInModal">
+              <i class="icon-white icon-heart"></i> follow
+            </button>
+          </tal:if>
+          <tal:if condition="logged_in">
+            <tal:if condition="is_following">
+              <button class="btn btn-info followButton following" rel="${channelname.Channel.username}" style="width:85px; margin: 10px 0px 0px 0px;">following</button>
+            </tal:if>
+            <tal:if condition="not: is_following">
+              <button class="btn btn-info followButton" rel="${channelname.Channel.username}" style="width:85px; margin: 10px 0px 0px 0px;">
+                <span class="icon-white icon-heart"></span> follow
+              </button>
+            </tal:if>
+          </tal:if>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid well span9" id ="hoverquestion" style="margin:52px 0px 10px 0px; padding: 0px 6px 0px 0px;">
+      <div>
+        <tal:if condition="answerlist">
+      	  <div id="Video2" style="margin:0px; width: 706px; height:399px; background-image:url('${request.static_url('atv:static/img/static.png')}'); background-repeat:repeat-xy;">
+          <div id="Video" style="border-bottom: 1px solid #E1E8ED; padding: 0px 6px 0px 0px;"></div>
+          <script>
+            jwplayer("Video").setup({
+            file: "${answerlist.embedcode}",
+            width: 706,
+            height: 399,
+            skin: "bekle",
+            autostart: true,
+            });
+            jwplayer().onError(function(){
+				jwplayer( 'Video' ).stop();
+				jwplayer( 'Video' ).stop();
+				$("#Video").fadeOut(0);
+				$("#Video2").css("background-image","url('http://media.answer.tv/img/staticloadingscreen.png')").fadeIn(0);
+			});
+          </script>
+          </div>
+        </tal:if>
+        <tal:if condition="not:answerlist">
+          <div id="videoBox" style="margin:0px; width: 706px; height:399px; background-image:url('${request.static_url('atv:static/img/static.png')}'); background-repeat:repeat-xy;">
+            <div style="height:50px;"></div>
+            <div style="margin:0px 50px 0px 50px; ">
+              <p id="statictext" style="color:#fff; font-size:24px; font-weight: bold; text-shadow: 2px 2px 2px rgba(150, 150, 150, 1);">
+                ${channelname.Channel.name} (${channelname.Channel.username}) has not answered this question yet.
+              </p>
+            </div>
+          </div>
+        </tal:if>
+      </div>
+      <div id="questionboxmain" style="border-bottom: 1px solid #E1E8ED; border-top: 1px solid #E1E8ED; position:relative; padding: 0px 6px 0px 0px">
+      <div id="questionboxmain-${questionname.Question.alias}">
+        <a href="/${questionname.Question.askedbyalias}/${questionname.Question.alias}">
+          <span class="questionbox"></span>
+        </a>
+        <div class="container span1">
+          <tal:if condition="logged_in">
+            <div id="${questionname.Question.alias}" class="upvote" style="margin:12px 0px 0px 0px;">
+              <a class="upvote questionboxover"></a>
+              <span class="count questionboxover" style="margin: 3px 0px 3px 0px;"></span>
+              <a class="downvote questionboxover"></a>
+            </div>
+          </tal:if>
+          <tal:if condition="not:logged_in">
+            <div id="${questionname.Question.alias}" class="upvote questionboxover" style="margin: 12px 0px 3px 0px;">
+              <a class="upvote questionboxover" data-toggle="modal" data-target="#signInModal"></a>
+              <span class="count questionboxover" style="margin: 3px 0px 3px 0px;"></span>
+              <a class="downvote questionboxover" data-toggle="modal" data-target="#signInModal"></a>
+            </div>
+          </tal:if>
+          <tal:if condition="not:exists:questionname.Qvote.downvote">
+          	<meta class="questiondata" question="${questionname.Question.alias}" count="${questionname.Question.qkarma}" />
+          </tal:if>
+          <tal:if condition="exists:questionname.Qvote.downvote">
+          	<meta class="questiondata" question="${questionname.Question.alias}" count="${questionname.Question.qkarma}" upvoted="${questionname.Qvote.upvote}" downvoted="${questionname.Qvote.downvote}" />
+          </tal:if>
+        </div>
+        <div class="container span8 offset1">
+          <p>
+            <a href="/${questionname.Question.askedbyalias}">
+              <img class="questionboxover" src="${request.static_url('atv:static/miniprofileimg/')}${questionname.Images.profilepic}" style="margin:7px 5px 3px 5px; z-index:2; height:20px; border-radius: 3px;">
+              </a>
+            <a href="/${questionname.Question.askedbyalias}" style="font-size:11px;" class="underlying questionboxover">
+              ${questionname.Question.askedbyname} (${questionname.Question.askedby})
+            </a>
+            <tal:if condition="questionname.Question.answered">
+            	<tal:if condition="logged_in">
+            	<tal:if condition="python: questionname.Question.askedtoalias == logged_in_alias">
+	            <a class="answerbutton" id="deleteanswertrash" onclick='deleteAnswer("videoBox", "${questionname.Question.alias}");' style=" float:right; cursor: pointer; font-size:20px; margin-top:5px; margin-left:20px;  color:#CCD6DD;" title="Delete answer">
+	              <i class="icon-trash questionboxover"></i>
+	            </a> 
+	            </tal:if>  
+	            </tal:if> 
+            </tal:if>  
+            <a style="float:right; font-size:20px; margin-top:5px; margin-right:0px; color:#CCD6DD;" title="Views"><i class="icon-eye-open"></i> ${views}</a>  
+            <h4 style="margin:0px 0px 12px 10px; padding:0px; font-weight:normal; line-height:18px;">
+              ${questionname.Question.questionmain}
+            </h4>
+            <div style="">
+              <p id="toolbar-${questionname.Question.alias}" style="font-size:20px; margin-top:5px;">
+                <tal:if condition="questionname.Question.answered">
+                  <i class="icon-comments questionboxover" id="answeredIcon" style="margin:4px 0px 0px 10px; color:#01DF01;" title="Question answered" ></i>
+                </tal:if>
+                <tal:if condition="not: questionname.Question.answered">
+                  <i class="icon-comments questionboxover"  style="margin:4px 0px 0px 10px; color:#FF0000;" title="Question not answered yet" ></i>
+                </tal:if>
+                <tal:if condition="logged_in">
+                  <tal:if condition="mychannel">
+                    <tal:if condition="not:questionname.Question.answered">
+                       <a class="answerbutton"  data-toggle="modal" onclick='uploadTag("${questionname.Question.askedby}", "${questionname.Question.askedto}", "${questionname.Question.questionmain}", "${questionname.Question.alias}");' data-target="#uploadModal" style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Upload answer" >
+                          <i class="icon-white icon-upload-alt questionboxover"></i>
+                        </a>
+                        <a class="answerbutton" data-toggle="modal" onclick='uploadTag("${questionname.Question.askedby}", "${questionname.Question.askedto}", "${questionname.Question.questionmain}", "${questionname.Question.alias}");' data-target="#embedModal" style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Embed answer from Youtube" >
+                          <i class="icon-white icon-youtube questionboxover"></i>
+                        </a>
+                    </tal:if>
+                  </tal:if>
+                  <tal:if condition="python: questionname.Question.askedbyalias == logged_in_alias">
+                     <a class="answerbutton" onclick='deleteQuestion("${questionname.Question.alias}", false);' style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Delete question">
+                      <i class="icon-trash questionboxover"></i>
+                    </a>
+                  </tal:if>
+                </tal:if>
+              </p>
+              <p style="margin-left:10px;">
+                ${questionname.Question.questiontext}
+              </p>
+            </div>
+            </div>
+          </div>
+        <div class="container span9" style="border-top: 1px solid #E1E8ED; border-bottom: 1px solid #E1E8ED; margin: 10px 0px 0px 0px; padding: 0px 6px 0px 0px">
+          <h2 style="color: #66757F; font-size: 18px; font-weight: 300; line-height: 22px; margin:10px 0px 10px 10px; ">
+            Hot questions for ${channelname.Channel.username}
+          </h2>
+        </div>
+        <div id="livequestioncontainer">
+        <div tal:repeat="row questionlist">
+        <div class="container span9 questionboxmain" id="questionboxmain-${row.Question.alias}" style="border-bottom: 1px solid #E1E8ED; position:relative; padding: 0px 6px 0px 0px">
+          <tal:if condition="exists:row.Qvote.downvote">	
+          <meta class="questiondata" question="${row.Question.alias}" count="${row.Question.qkarma}" upvoted="${row.Qvote.upvote}" downvoted="${row.Qvote.downvote}" />
+           </tal:if>
+          <tal:if condition="not:exists:row.Qvote.downvote">
+          <meta class="questiondata" question="${row.Question.alias}" count="${row.Question.qkarma}" />
+          </tal:if>
+          <div id="questionboxmain-${row.Question.alias}">
+          <a href="/${row.Question.askedtoalias}/${row.Question.alias}">
+            <span class="questionbox"></span>
+          </a>
+            <div class="container span1">
+              <tal:if condition="logged_in">
+                <div id="${row.Question.alias}" class="upvote" style="margin:12px 0px 0px 0px;">
+                  <a class="upvote questionboxover"></a>
+                  <span class="count questionboxover" style="margin: 3px 0px 3px 0px;"></span>
+                  <a class="downvote questionboxover"></a>
+                </div>
+              </tal:if>
+              <tal:if condition="not:logged_in">
+                <div id="${row.Question.alias}" class="upvote questionboxover" style="margin: 12px 0px 3px 0px;">
+                  <a class="upvote questionboxover" data-toggle="modal" data-target="#signInModal"></a>
+                  <span class="count questionboxover" style="margin: 3px 0px 3px 0px;">${row.Question.qkarma}</span>
+                  <a class="downvote questionboxover" data-toggle="modal" data-target="#signInModal"></a>
+                </div>
+              </tal:if>
+            </div>
+          <div class="container span8 offset1">
+            <p>
+              <a href="/${row.Question.askedbyalias}">
+                <img class="questionboxover" src="${request.static_url('atv:static/miniprofileimg/')}${row.Images.profilepic}" style="margin:7px 5px 3px 5px; z-index:2; height:20px; border-radius: 3px;">
+              </a>
+              <a href="/${row.Question.askedbyalias}" style="font-size:11px;" class="underlying questionboxover">
+                ${row.Question.askedbyname} (${row.Question.askedby})
+              </a>
+              <a href="/${row.Question.askedtoalias}/${row.Question.alias}" style="color: #333;" class="questionboxover">
+              <h4 style="margin:0px 0px 12px 10px; padding:0px; font-weight:normal; line-height:18px;">
+                  ${row.Question.questionmain}
+              </h4>
+              </a>
+              <div style="">
+                <p id="toolbar-${row.Question.alias}" style="font-size:20px; margin-top:5px;">
+                  <tal:if condition="row.Question.answered">
+                    <i class="icon-comments questionboxover"  style="margin:4px 0px 0px 10px; color:#01DF01;" title="Question answered" ></i>
+                  </tal:if>
+                  <tal:if condition="not: row.Question.answered">
+                    <i class="icon-comments questionboxover"  style="margin:4px 0px 0px 10px; color:#FF0000;" title="Question not answered yet" ></i>
+                  </tal:if>
+                  <tal:if condition="logged_in">       
+                    <tal:if condition="mychannel">
+                      <tal:if condition="not:row.Question.answered">
+                        <a class="answerbutton"  data-toggle="modal" onclick='uploadTag("${row.Question.askedby}", "${row.Question.askedto}", "${row.Question.questionmain}", "${row.Question.alias}");' data-target="#uploadModal" style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Upload answer" >
+                          <i class="icon-white icon-upload-alt questionboxover"></i>
+                        </a>
+                        <a class="answerbutton" data-toggle="modal" onclick='uploadTag("${row.Question.askedby}", "${row.Question.askedto}", "${row.Question.questionmain}", "${row.Question.alias}");' data-target="#embedModal" style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Embed answer from Youtube" >
+                          <i class="icon-white icon-youtube questionboxover"></i>
+                        </a>
+                      </tal:if>
+                    </tal:if>
+                    <tal:if condition="python: row.Question.askedbyalias == logged_in_alias">
+                      <a class="answerbutton" data-toggle="modal" onclick='deleteQuestion("${row.Question.alias}", false);'  style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Delete question">
+                        <i class="icon-trash questionboxover"></i>
+                      </a>
+                    </tal:if>
+                  </tal:if>
+                </p>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="container span3">
+    <div class="container well span3" id="infobox" style="margin:52px 0px 0px 10px; padding: 0px 0px 0px 0px;">
+      <div>
+        <div style="border-bottom: 1px solid #E1E8ED; padding: 10px 0px 10px 0px;">
+          <h4 style="line-height:22px; font-weight:strong; margin:0px 10px 0px 10px; font-family: Gotham Narrow SSm, sans-serif;">${channelname.Channel.name}</h4>
+          <span style="margin:0px 0px 0px 10px;">
+            <a href="${request.application_url}/${channelname.Channel.usralias}" class="underlying">(${channelname.Channel.username})</a>
+          </span>
+        </div>
+        <p style=" font-size: 12px; line-height: 16px; font-family: Gotham Narrow SSm, sans-serif; color:#4D4D4D; margin:10px 10px 15px 10px">${channelname.Channel.description}</p>
+        <p style="margin-left:12px; color:#4D4D4D;">
+          <i class="icon-map-marker" style="font-size:18px; color:#CC0000;" title="location"></i>  ${channelname.Channel.location}
+        </p>
+        <p style="margin-left:10px; color:#4D4D4D;">
+          <i class="icon-globe" style="font-size:18px; color:#4D4D4D;" title="webpage"></i>
+          <a href="http://${channelname.Channel.url}" rel="nofollow" target="_blank" class="underlying">  ${channelname.Channel.url}</a>
+        </p>
+      </div>
+    </div>
+    <div class="container well span3" style="margin:10px 0px 0px 10px; padding: 0px 0px 0px 0px;">
+      <div class="footer-links" style="margin:10px 10px 10px 10px">
+        <h4 style="line-height:22px; font-weight:strong; margin:0px 10px 0px 0px; font-family: Gotham Narrow SSm, sans-serif;">Share</h4>
+        <div style="margin-top:5px;">
+         <p>
+            <a style="cursor: pointer; cursor: hand; margin:0px; border:0px;" onclick="window.open('http://www.facebook.com/sharer.php?u=http://www.answer.tv/${channelname.Channel.usralias}/${questionname.Question.alias}', 'a', 'width=500, height=200, scrollbars=0, resizable=0')">
+              <img src="${request.static_url('atv:static/img/facebook.png')}"/>
+            </a>
+            <a style="cursor: pointer; cursor: hand; margin:0px; border:0px;" onclick="window.open('http://twitter.com/share?url=http://www.answer.tv/${channelname.Channel.usralias}/${questionname.Question.alias}&text=${questionname.Question.questionmain}', 'a', 'width=500, height=230, scrollbars=0, resizable=0')">
+              <img src="${request.static_url('atv:static/img/twitter.png')}"/>
+            </a>
+            <a style="cursor: pointer; cursor: hand; margin:0px; border:0px;" onclick="window.open('https://plus.google.com/share?url=http://www.answer.tv/${channelname.Channel.usralias}/${questionname.Question.alias}}', 'a', 'width=500, height=230, scrollbars=0, resizable=0')">
+              <img src="${request.static_url('atv:static/img/gplus.png')}"/>
+            </a>
+            <a style="margin:0px; border:0px;" href="http://reddit.com/submit?url=http://www.answer.tv/${channelname.Channel.usralias}/${questionname.Question.alias}" target="_blank">
+              <img src="${request.static_url('atv:static/img/reddit.png')}"/>
+            </a>
+          </p>
+      </div>
+      </div>
+    </div>
+    <div class="container well span3" style="margin:10px 0px 0px 10px; padding: 0px 0px 0px 0px;">
+      <div class="footer-links" style="margin:10px 10px 10px 10px">
+        <span>&copy; 2013 answer.tv </span>
+        <a href="/help">Help</a>
+        <a href="/blog">Blog</a>
+        <a href="/copyright">Copyright</a>
+        <a href="/terms">Terms</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div style="margin:10px 10px 10px 10px">
+        <a href="http://www.facebook.com/answertv" style="text-decoration:none;">
+          <img src="${request.static_url('atv:static/img/facebookfooter.png')}">
+								</a>
+        <a href="http://twitter.com/answerdottv" style="margin-left:13px; text-decoration:none;">
+          <img src="${request.static_url('atv:static/img/twitterfooter.png')}">
+								</a>
+      </div>
+    </div>
+    </div>
+    <script>
+      // The rel attribute is the userID you would want to follow
+      $('button.followButton').live('click', function(e){
+      e.preventDefault();
+      $button = $(this);
+      if($button.hasClass('following')){
+
+      //$.ajax(); Do Unfollow
+
+      $button.removeClass('following');
+      $button.removeClass('unfollow');
+      $button.html('<span class="icon-white icon-heart"></span> follow');
+      $.post("${request.application_url}/2x4b32cp",
+      {
+      following:"${channelname.Channel.username}",
+      followunfollow:"unfollow"
+      });
+      }
+      else {
+
+      // $.ajax(); Do Follow
+
+      $button.addClass('following');
+      $button.text('following');
+      $.post("${request.application_url}/2x4b32cp",
+      {
+      following:"${channelname.Channel.username}",
+      followunfollow:"follow"
+      });
+      }
+      });
+
+      $('button.followButton').hover(function(){
+      $button = $(this);
+      if($button.hasClass('following')){
+      $button.addClass('unfollow');
+      $button.text('unfollow');
+      }
+      }, function(){
+      if($button.hasClass('following')){
+      $button.removeClass('unfollow');
+      $button.text('following');
+      }
+      });
+    </script>
+  </div>
+</metal:main>

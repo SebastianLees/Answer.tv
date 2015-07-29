@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<div metal:define-slot="title"></div>
+<meta name="viewport" content="width=device-width, initial-scale=0.7">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+<meta name="keywords" content="answer.tv, question, answer, video, faq, questions, answers, video site video upload, q&a, q and a, video answers" />
+<div metal:define-slot="description"></div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="${request.static_url('atv:static/js/jquery.upvote.js')}"></script>
+<script src="//cdn.pandastream.com/u/2.1/panda-uploader.min.js"></script>
+<script src="http://jwpsrv.com/library/y4pv0FIiEeSfJCIAC0WXxA.js"></script>
+<script src='//cameratag.com/2.1/cameratag.js' type='text/javascript'></script>
+<link rel="apple-touch-icon" href="${request.static_url('atv:static/img/touchicon.png')}">
+<link rel="icon" href="${request.static_url('atv:static/img/favicon.png')}">
+<link rel="shortcut icon" href="${request.static_url('atv:static/img/favicon.png')}" />
+<!--[if IE]><link rel="shortcut icon" href="${request.static_url('atv:static/img/favicon.ico')}"><![endif]-->
+<meta name="msapplication-TileColor" content="#D83434">
+<meta name="msapplication-TileImage" content="${request.static_url('atv:static/img/tileicon.png')}">
+<link rel="shortcut icon" href="${request.static_url('atv:static/img/favicon.ico')}" />
+<link rel="stylesheet" href="${request.static_url('atv:static/css/bootstrap.min.css')}" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="${request.static_url('atv:static/css/socialbuttons.css')}" type="text/css" media="screen" charset="utf-8" />
+<title>Welcome to Answer.tv - Log in, sign up or learn more</title>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css">
+<meta name="description" content="Welcome to Answer.tv - ask questions, vote on the most important ones, and receive personalised video answers from your friends - and other fascinating people & organisations."/>
+<script src="${request.static_url('atv:static/js/bootstrap.min.js')}"></script> 
+<!-- Custom splashpage CSS -->
+    <link href="${request.static_url('atv:static/css/')}landing-page10.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-8673947-14', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+		<!-- Browser Detection -->    	
+		<!--[if lte IE 7]>  
+			<div id="player" style="display:block; position:fixed; width:100%; height:100%; background:#000; -moz-opacity: 0.65; opacity:.65;filter: alpha(opacity=65); z-index:30000;">
+		    </div>
+			<div class="modal fade in" id="upgrade" style="z-index:30001;" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
+			<div class="modal-header" style="height:100px;">
+			<h4 class="modal-title" id="myModalLabel" style="color: #08c; float:left; display:block; margin-left:20px; font-size: 18px; font-weight: 300; line-height: 22px;"><i class="icon-exclamation-sign" style="color:#FF0000;"></i> Upgrade your browser...</h4>  
+			<p style="color: #66757F; float:left; display:block; margin-left:25px; font-size: 14px; font-weight: 300;"> You appear to be using an out of date browser, which is not compatible with answer.tv. We strongly recommend you upgrade your browser to enhance your
+			overall web experience.</p> 
+			</div>
+			<div>
+			<a target="_blank" href="http://www.getfirefox.com/"><img src="${request.static_url('atv:static/img/')}firefox.png" title="Mozilla Firefox"></a>
+			<a target="_blank" href="http://www.google.com/chrome/"><img src="${request.static_url('atv:static/img/')}chrome.png" title="Chrome"></a>
+			<a target="_blank" href="http://www.getie.com/"><img src="${request.static_url('atv:static/img/')}ie.png" title="Microsoft Internet Explorer"></a>
+			</div>
+			</div>
+		<![endif]-->	
+		<div>
+			<div class="navbar navbar-fixed-top" id="header">
+				<div class="navbar-inner" style="border-radius:0px; border-top:0px;">
+					<div class="container-fluid span12" style="margin:0 auto; float:none;">
+						<div tal:condition="not: logged_in">
+								<ul class="nav pull-left">
+									<li class="divider-vertical" style="margin:0px 0px;"></li>
+									<li class="dropdown">
+									<a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
+										<div class="dropdown-menu" style="padding: 15px; padding-bottom: 5px; width:206px;">
+											<form action="${request.application_url}/login" method="post">
+												<input type="hidden" name="came_from" value="/"/>
+												<input style="margin-bottom: 15px; width:191px;"" type="text" placeholder="Username" id="email" name="login" value=''>
+												<input style="margin-bottom: 15px; width:191px;"" type="password" placeholder="Password" id="password" name="password" value=''>
+												<input style="float: left; margin-right: 10px;" type="checkbox" checked name="rememberbox">
+												<label class="string optional" for="user_remember_me"> Keep me signed in</label>
+												<button type="submit" class="btn btn-info btn-block" name="form.submitted" style="padding:10px 0px; font-size:18px;">Sign in</button>
+												<p class="forgotpwd" style="margin-top:8px; padding-bottom:8px; float:left;"><a href="/reset">forgot your username or password?</a></p> 
+											</form>
+										</div>
+									</li>
+									<li class="divider-vertical" style="margin:0px 0px;"></li>
+									<li><a href="/signup">Sign Up</a></li>
+									<li class="divider-vertical" style="margin:0px 0px;"></li>
+								</ul>
+								<ul class="nav pull-right">
+								<li>
+								<form class="form-search span2" style="margin: 5px 0px 0px 5px; width:300px;" action="${request.application_url}/search" method="post">
+										<div class="input-append">
+											<input type="text" name="searchterm" class="search-query" style="width:220px;" required>
+											<button type="submit" class="btn"><i class="icon-search"></i></button>
+										</div>
+								</form>
+								</li>
+								</ul>
+							</div>
+							<div tal:condition="logged_in">
+								<ul class="nav pull-left">
+									<li class="divider-vertical" style="margin:0px 0px;"></li>
+									<li id="meprofile"><a href="${request.application_url}/${logged_in_alias}"><i class="icon-user"></i> me</a></li>
+									<li class="divider-vertical" style="margin:0px 0px;"></li>
+									<li id="streamprofile"><a href="${request.application_url}/i/stream"><i class="icon-th-list"></i> stream</a></li>
+									<li class="divider-vertical" style="margin:0px 0px;"></li>
+									<li id="followingprofile"><a href="${request.application_url}/${logged_in_alias}/following"><i class="icon-heart"></i> following</a></li>
+									<li class="divider-vertical" style="margin:0px 0px;"></li>
+								</ul>
+								<ul class="nav pull-right">
+								<li>
+								<form class="form-search span2" style="margin: 5px 0px 0px 5px; width:230px;" action="${request.application_url}/search" method="post">
+										<div class="input-append">
+											<input type="text" name="searchterm" class="search-query" style="width:145px;" required>
+											<button type="submit" class="btn"><i class="icon-search"></i></button>
+										</div>
+								</form>
+								</li>
+								<li class="divider-vertical" style="margin:0px 0px;"></li>
+								<li class="dropdown">
+									<a class="dropdown-toggle" href="#" data-toggle="dropdown"><i class="icon-cogs"></i> <strong class="caret"></strong></a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="padding:2px 0px; margin:0px 0px;">
+										<li role="presentation"><a role="menuitem" tabindex="-1" href="${request.application_url}/i/edit">edit profile</a></li>
+										<li role="presentation"><a role="menuitem" tabindex="-1" href="${request.application_url}/${logged_in_alias}/history/q">comment history</a></li>
+										<li role="presentation"><a role="menuitem" tabindex="-1" href="${request.application_url}/help">help</a></li>
+										<li role="presentation" class="divider" style="margin:3px 1px;"></li>
+										<li role="presentation"><a role="menuitem" tabindex="-1" href="${request.application_url}/logout">logout</a></li>
+										</ul>			
+							    <li class="divider-vertical" style="margin:0px 0px;"></li>		
+								</ul>
+							</div>
+							<div style="width:140px; height:30px; padding:0px; float:none; margin:0 auto;">
+						      <img src="${request.static_url('atv:static/img/logo_small8.png')}" height="40px" width="130px" style="margin-top:7px;"/>
+							</div>
+					</div><!--/.container-fluid -->
+				</div><!--/.navbar-inner -->
+			</div><!--/.navbar -->
+		</div>
+		<div class="wrapper" style="margin:0px auto;">
+		  <div class="subwrapper span12" style="margin:0px auto; float:none;">
+			<div class="pagecontent" style="margin-top:0px; padding-top:0px;">
+				<div metal:define-slot="content"></div>
+			</div>
+			</div><!--/#subwrapper -->	
+	 <!-- Header -->
+    <div class="intro-header" style="background: url(http://media.answer.tv/img/landingbg1.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1 style="line-height:80px;">Video Content You Care About!</h1>
+                        <h3 style="padding-top:20px;">Ask questions. Get personalised video responses from the people, hobbies and organizations that matter to you.</h3>
+                        <div class="container span3" style="margin:0 auto; float:none;">
+                        <div class="main intro-message">
+							<h3>Sign up (it's free)</h3>
+						</div>
+						<div class="main" style="z-index:1001;">
+							<form action="${request.application_url}/signup" method="post">
+							<div class="form-group">
+								<input type="hidden" name="came_from" value="/"/>
+								<label for="inputUsernameEmail">Username</label>
+								<input type="text" class="form-control" id="inputUsernameEmail" name="login" value="" style="width:100%; background-color: #fff;" required/>
+								<label for="inputPassword">Password</label>
+								<input type="password" class="form-control" id="inputPassword" name="password" value="" style="width:100%; background-color: #fff;" required/>
+								<label for="inputUsernameEmail">Email</label>
+								<input type="email" class="form-control" name="email" value="" style="width:100%; background-color: #fff;" required/>
+							</div>
+							<button type="submit" name="form.submitted" class="btn btn btn-success" style="width:106%; padding:12px 0px; margin: 12px 0px;"><span style="font-size:24px;">Sign up</span></button>
+							<br>
+							</form>
+						</div> 
+						</div>
+						<br>
+						<p><h6 style="text-align: center;">By signing up you agree to our<a href="${request.application_url}/terms" style="color:#fff;"> terms of service</a>, <a href="${request.application_url}/privacy" style="color:#fff;">  privacy policy</a>,  and <a href="${request.application_url}/copyright" style="color:#fff;">copyright and content policy</a>.</h6></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+
+    <!-- Page Content -->
+
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <div class="clearfix"></div>
+                    <h2 style="margin-left:40px;" class="section-heading">Ask Questions</h2>
+                    <p style="margin-left:40px;" class="lead">Ask questions to the people, hobbies and organizations that matter to you.</p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img style="margin-left:40px;" class="img-responsive" src="${request.static_url('atv:static/img/')}ipad2.png" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <div class="clearfix"></div>
+                    <h2 style="margin-left:40px;" class="section-heading">Vote</h2>
+                    <p style="margin-left:40px;" class="lead">Vote on the questions most important to you. See what questions are most important to your followers.</p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img style="margin-left:40px;" class="img-responsive" src="${request.static_url('atv:static/img/')}dog2.png" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+
+    <div class="content-section-a">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <div class="clearfix"></div>
+                    <h2 style="margin-left:40px;" class="section-heading">Record & Recieve Personalized Video Responses</h2>
+                    <p style="margin-left:40px;" class="lead">Record & recieve video responses on any device. Connect with your followers. Be informed. Entertain. Learn.</p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img style="margin-left:40px;" class="img-responsive" src="${request.static_url('atv:static/img/')}phones2.png" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+    <div class="banner" style="background: url(http://media.answer.tv/img/landingbg1.jpg);">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="container span3" style="margin:0 auto; float:none;">
+                	<h2>Try us out!</h2>
+                </div>
+                 <div style="height:20px;">
+   				 </div>
+                 <div class="container span3" style="margin:0 auto; float:none;">
+                        <div class="main intro-message">
+						</div>
+						<div class="main">
+							<form action="${request.application_url}/signup" method="post">
+							<div class="form-group" style="z-index:1001;">
+								<input type="hidden" name="came_from" value="/"/>
+								<label for="inputUsernameEmail">Username</label>
+								<input type="text" class="form-control" id="inputUsernameEmail" name="login" value="" style="width:100%; background-color: #fff;" required/>
+								<label for="inputPassword">Password</label>
+								<input type="password" class="form-control" id="inputPassword" name="password" value="" style="width:100%; background-color: #fff;" required/>
+								<label for="inputUsernameEmail">Email</label>
+								<input type="email" class="form-control" name="email" value="" style="width:100%; background-color: #fff;" required/>
+							</div>
+							<button type="submit" name="form.submitted" class="btn btn btn-success" style="width:106%; padding:12px 0px; margin: 12px 0px;"><span style="font-size:24px;">Sign up</span></button>
+							<br>
+							</form>
+						</div> 
+				</div>
+            </div>
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.banner -->
+    <!-- Footer -->
+    <div style="height:20px;">
+    </div>
+    <div class="footer-static-page span12" style="margin:0 auto; float:none; border:0px; ">
+    <div class="container">
+      <div class="row">
+        <div class="span10">
+          <div class="footer-links">
+            <span> </span>
+            <a href="/help">Help</a>
+            <a href="/blog">Blog</a>
+            <a href="/copyright">Copyright & Content</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/contact">Contact Us</a>
+          </div>
+          <div class="footer-disclaimer">&copy; 2013 answer.tv all rights reserved. Use of this site constitutes acceptance of our Privacy Policy and Terms of Service.</div>
+        </div>
+        <div class="span2 text-center footer-social-links" style="margin-top:3px;">
+          <div>
+            <a href="http://www.facebook.com/answertv" style="text-decoration:none;">
+              <img src="${request.static_url('atv:static/img/facebookfooter.png')}">
+								</a>
+            <a href="http://twitter.com/answerdottv" style="margin-left:13px; text-decoration:none;">
+              <img src="${request.static_url('atv:static/img/twitterfooter.png')}">
+								</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="height:20px;">
+    </div>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+</html>

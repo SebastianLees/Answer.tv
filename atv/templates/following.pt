@@ -1,0 +1,54 @@
+<metal:main use-macro="load: base.pt">
+<div metal:fill-slot="title"><title>Following - ${channelname.Channel.name} (${channelname.Channel.username}) on answer.tv</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content="See who ${channelname.Channel.name} is following on answer.tv"/>
+</div>
+<div metal:fill-slot="body">
+  <body style="background-color:#eeeff4;">
+</div>
+<div metal:fill-slot="content">
+	<tal:if condition="logged_in">
+		<script>
+      $( document ).ready(function() {
+      $("#followingprofile").addClass('active');
+      });
+    </script>
+	</tal:if>
+	<div class="followers_container container span12" style="margin:0 auto; float:none;">
+		<tal:block repeat="row Mfollowing_list">
+      <div id="${row.Channel.usralias}" class="container fluid well thumbnail span2" style="float:left; margin:0px 6px 10px 0px;">
+			<p align="center">
+        <a href="${request.application_url}/${row.Channel.usralias}">
+        <img id ="NAMEpic" src="${request.static_url('atv:static/profileimg/')}${row.Images.profilepic}" width="100px" style="border-radius: 3px; margin:5px 0px 0px 0px;" onError="this.onerror=null;this.src='${request.static_url('atv:static/profileimg/shadowman.png')}';">
+        </a>
+      </p>
+        	<h5 align="center"><a href="${request.application_url}/${row.Channel.usralias}">${row.Channel.username}</a></h5>
+        	<tal:if condition="own_page">
+        		<div id="${row.Channel.usralias}unfollow">
+        			<p align="center"><a href="#" class="btn btn-danger"><i class="icon-white icon-heart"></i> unfollow</a></p>
+        		</div>
+        	</tal:if>
+      	</div>
+      	<script>
+      	$("#${row.Channel.usralias}unfollow").click(function() {
+			$("#${row.Channel.usralias}").fadeOut();
+			$.post("${request.application_url}/2x4b32cp",
+  			{
+   	 		following:"${row.Channel.usralias}",
+    		followunfollow:"unfollow"
+  			});
+		});
+		</script>
+    </tal:block>
+	</div>
+  <div class="container span12" style="padding: 0px 0px 0px 0px">
+    <div class="paginationcontainer container span12" style="margin:0 auto; float:none;">
+      <div class="pull-right" style="margin: 15px 15px 15px 0px">
+        ${Mfollowing_list.pager(format="$link_first $link_previous ~3~ $link_next $link_last", link_attr={'class':'btn btn-default'}, curpage_attr={'class':'btn btn-info disabled'})}
+      </div>
+    </div>
+  </div>
+</div>
+</metal:main>
+
+

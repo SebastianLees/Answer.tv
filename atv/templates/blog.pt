@@ -1,0 +1,69 @@
+<metal:main use-macro="load: base2.pt">
+<div metal:fill-slot="title"><title>Blog - answer.tv</title>
+</div>
+<div metal:fill-slot="body">
+  <body style="background-color:#eeeff4; fixed top left;" >
+</div>
+<div metal:fill-slot="description"><meta name="description" content="Official blog for answer.tv"/>
+</div>
+<div metal:fill-slot="content">
+	<div id="content" class="container-fluid well span12" style="margin:0 auto; float:none; margin-bottom:08px;">
+		<div style="padding-left:10px; padding-right:10px">
+			<h2 style="color: #66757F; margin: 15px 0px 0px 0px; font-size: 22px; font-weight: 300; line-height: 22px;">Blog</h2>
+        <h3 style="font-weight:normal">Greetings & Salutations<h3>
+          <h6 style="font-weight:normal ">
+            <b>
+              <i>1st August 2014</i>
+            </b>
+          </h6>
+          <p></p>
+          <p>Hello and welcome to my site. I'm Seb - founder of Answer.tv. Today is answer.tv's birthday - it is brand new (and still in beta so quite buggy - please bear with me
+          while I sort out the gremblins).</p>
+          <p>
+            It seems to be the done thing amongst websites to push a creation story - mainly for PR purposes, for example the eBay story of Pierre Omidyar creating eBay to
+            help his fiancée trade Pez candy dispensers was fabricated by a public relations manager in 1997 to interest the media, which were not interested
+            in the company's previous explanation about wanting to create a "perfect market". Since my site is new and I need to drum up interest in the media, I've decided I need a good creation myth
+            - contact us with any good ideas and we'll put the best ones up on this blog. 
+          </p>
+          <p>
+            I created answer.tv as I wanted an easy way to for people to answer questions online. I also wanted people to be able to connect with the answers, in a way written text sometimes can't.
+            After putting up a proof of concept last year, I forgot about it for a while, but revisited it a few months ago, taking the feedback I'd received from testers to redesign the site. 
+          </p>
+          <p>
+           As this site it still very new, I'd be really keen to hear from anyone with feedback / comments as we'll be rolling out new features as the site grows, and I want the community to influence
+           how it takes shape. So please feel free to ask me anything, and watch this space...
+          </p>
+          <p></p>
+          <p></p>
+		</div>
+	</div>
+  <div class="footer-static-page">
+    <div class="container">
+      <div class="row">
+        <div class="span10">
+          <div class="footer-links">
+            <span> </span>
+            <a href="/help">Help</a>
+            <a href="/blog">Blog</a>
+            <a href="/copyright">Copyright & Content</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/contact">Contact Us</a>
+          </div>
+          <div class="footer-disclaimer">&copy; 2013 answer.tv all rights reserved. Use of this site constitutes acceptance of our Privacy Policy and Terms of Service.</div>
+        </div>
+        <div class="span2 text-center footer-social-links" style="margin-top:3px;">
+          <div>
+            <a href="http://www.facebook.com/answertv" style="text-decoration:none;">
+              <img src="${request.static_url('atv:static/img/facebookfooter.png')}">
+								</a>
+            <a href="http://twitter.com/answerdottv" style="margin-left:13px; text-decoration:none;">
+              <img src="${request.static_url('atv:static/img/twitterfooter.png')}">
+								</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</metal:main>

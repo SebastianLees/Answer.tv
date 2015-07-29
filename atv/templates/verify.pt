@@ -1,0 +1,21 @@
+<metal:main use-macro="load: base2.pt">
+<div metal:fill-slot="title"><title>Confirmation email sent - answer.tv</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content="Confirmation email sent for answer.tv registration."/>
+</div>
+<div metal:fill-slot="body">
+  <body style="background-color:#eeeff4; fixed top left;" >
+</div>
+<div metal:fill-slot="content">
+  <div id="content" class="container-fluid span12" style="margin:0 auto; float:none; margin-bottom:15px;">
+		<div style="padding-left:10px; padding-right:10px">
+			<br>
+			<br>
+			<p><h1 style="text-align:center; font-weight:normal;">Thanks!</h1></p>
+			<br>
+			<p align="center"><h4 style="font-weight:normal; text-align:center; margin: 0px 0px 30px 0px;">A confirmation email has been sent to the email address you supplied. When you receive the email click on the link
+			inside to activate your account. Please note that this link will expire if not used within 24 hours.</h4></p>
+		</div>
+	</div>
+</div>
+</metal:main>

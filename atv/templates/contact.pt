@@ -1,0 +1,79 @@
+<metal:main use-macro="load: base2.pt">
+<div metal:fill-slot="title"><title>Contact us - answer.tv</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content="Contact answer.tv"/>
+</div>
+<div metal:fill-slot="body">
+  <body style="background-color:#eeeff4; fixed top left;" >
+</div>
+<div metal:fill-slot="content">
+		<div class="container-fluid well span12" style="margin:0 auto; float:none; margin-bottom:8px;">
+		<br>
+				<div class="container span8" style="margin:0 auto; float:none;">
+    				<div class="row">
+        				<div class="col-mid-4">
+            				<form action="${request.application_url}/contact" method="post">
+            					<div class="get-in-touch">
+                					<h2 style="color: #66757F; margin: 15px 0px 0px 0px; font-size: 22px; font-weight: 300; line-height: 22px;">Get in touch</h2>
+                					<br>
+                    				<p>Feedback, comments, suggestions, fevered ranting and directions to buried treasure / lost cities welcome...</p>
+                    				<br>
+                					<div class="form-group">
+                    					<input type="text" class="form-control" style="width:70%;" name="sender" placeholder="Name" value="${senderblock}" required/>
+                					</div>
+                					<div class="form-group">
+                    					<input type="email" class="form-control" style="width:70%;" name="email" placeholder="Email" value="${emailblock}" required/>
+                					</div>
+                					<div class="form-group">
+                    					<textarea class="form-control" rows="6" style="width:100%;" name="message" placeholder="Message" required>${messageblock}</textarea>
+                					</div>
+                					<div>
+                					<script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LeTyuESAAAAAKNb8BOZDofUeJGm5FXxcwg0ua5l">
+  									</script>
+  									<noscript>
+     								<iframe src="http://www.google.com/recaptcha/api/noscript?k=6LeTyuESAAAAAKNb8BOZDofUeJGm5FXxcwg0ua5l"
+         							height="300" width="500" style="margin-left:-10px; padding-left:0px;" frameborder="0"></iframe><br>
+     								<textarea name="recaptcha_challenge_field" rows="3" cols="40">
+     								</textarea>
+     								<input type="hidden" name="recaptcha_response_field"
+         							value="manual_challenge">
+  									</noscript>
+  									</div>
+                					<input type="submit" value="Send it!" style="width:20%; margin-top:10px;" class="btn btn-danger btn-sm btn-block" role="button"></input>
+            					</div>
+            				</form>
+        				</div>
+        				<p><h5 class="text-center" style="color:black;">${status}</h5></p>
+    				</div>
+				</div>
+			</div>
+      <div class="footer-static-page">
+        <div class="container">
+          <div class="row">
+            <div class="span10">
+              <div class="footer-links">
+                <span> </span>
+                <a href="/help">Help</a>
+                <a href="/blog">Blog</a>
+                <a href="/copyright">Copyright & Content</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/contact">Contact Us</a>
+              </div>
+              <div class="footer-disclaimer">&copy; 2013 answer.tv all rights reserved. Use of this site constitutes acceptance of our Privacy Policy and Terms of Service.</div>
+            </div>
+            <div class="span2 text-center footer-social-links" style="margin-top:3px;">
+              <div>
+                <a href="http://www.facebook.com/answertv" style="text-decoration:none;">
+                  <img src="${request.static_url('atv:static/img/facebookfooter.png')}">
+								    </a>
+                <a href="http://twitter.com/answerdottv" style="margin-left:13px; text-decoration:none;">
+                  <img src="${request.static_url('atv:static/img/twitterfooter.png')}">
+								    </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+		</div>
+</metal:main>

@@ -1,0 +1,406 @@
+<metal:main use-macro="load: base2.pt">
+<div metal:fill-slot="title"><title>Explore</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content="Explore Answer.tv"/>
+</div>
+<div metal:fill-slot="body"><body style="background-color:#eeeff4; fixed top left;" >
+</div>
+  <div metal:fill-slot="content">
+    <script>
+	 //Upvote callback
+	 var callback = function(data) {
+				    $.ajax({
+				        url: '${request.application_url}/vote',
+				        type: 'post',
+				        data: {id: data.id, upvote: data.upvoted, downvote: data.downvoted}
+				    });
+					};       
+	</script>
+	 <script>
+        $( document ).ready(function() {
+        $("#exploreprofile").addClass('active');
+        });
+      </script>
+	<tal:if condition="not:logged_in">
+	<div class="container-fluid well span12" id="loginmodal" style="border:0px; background-image: url('http://media.answer.tv/img/landingbg1.jpg'); height:240px; margin:0 auto; float:none; padding: 0px 0px 0px 0px;">  
+    <div class="">
+    	<button type="button" id="closelogin" class="close" style="margin-right:30px;" aria-hidden="true">&times;</button>
+        <h2 style="text-align: center; margin-top:20px; color:#fff;">Video Content You Care About!</h2>
+        <h4 style="text-align: center; padding-top:10px; color:#fff;">Ask questions. Get personalised video responses from the people, hobbies and organizations that matter to you.</h4>
+        <div class="" style="width:100%;">
+			<div class="main" style="z-index:1001;">
+				<form action="${request.application_url}/signup" method="post">
+					<div style="margin:0px 0px 35px 0px;">
+						<div style=" width:75%; margin:0 auto; float:none;">
+							<input type="hidden" name="came_from" value="/"/>
+							<input type="text" class="form-control" id="inputUsernameEmail" name="login" placeholder='Username'  style="float:left;  margin-right:20px; width:150px; background-color: #fff;" required/>
+							<input type="password" class="form-control" id="inputPassword" name="password" placeholder='Password' style="float:left; margin-right:20px; width:150px; background-color: #fff;" required/>
+							<input type="email" class="form-control" name="email" placeholder='Email'  style="float:left; width:150px; margin-right:20px; background-color: #fff;" required/>
+							<button type="submit" name="form.submitted" class="btn btn btn-success" style="float:left; width:150px;"><span style="font-size:20px;">Sign up</span></button>
+						</div>
+					</div>
+				</form>
+				<br>
+			</div> 
+		<br>
+		<p><h6 style="text-align: center; color:#fff;">By signing up you agree to our<a href="${request.application_url}/terms" style="color:#fff;"> terms of service</a>, <a href="${request.application_url}/privacy" style="color:#fff;">  privacy policy</a>,  and <a href="${request.application_url}/copyright" style="color:#fff;">copyright and content policy</a>.</h6></p>
+	</div>
+    </div>
+	</div>
+	</tal:if>
+	<script>
+		$('#closelogin').click(function(){
+    		$('#loginmodal').fadeOut(400)
+		});
+	</script>
+  <div class="container-fluid span12" style="margin:10px 0px 10px 0px; padding: 0px 6px 0px 0px;">	
+	  <div class="container-fluid well span9" id ="hoverquestion" style="margin:0px 0px 10px 0px; padding: 0px 6px 0px 0px;">
+      <div class="container-header">
+       <div class="span3">
+          <h2 style="color: #66757F; margin-left:0px; float:left; font-size: 22px; font-weight: 300; line-height: 22px;">
+            Trending
+          </h2>
+            <img id="loading" style="float:left; display: none; margin: 16px 0px 0px 9px;" src="${request.static_url('atv:static/img/loader.gif')}"/>
+        </div>
+      </div>
+      <div style="border-bottom: 1px solid #E1E8ED; width:100%; padding: 40px 6px 5px 0px"> 
+      </div>
+      <div id="livequestioncontainer">
+      <div tal:repeat="row trendinglist">
+        <div class="container span9 questionboxmain" id="questionboxmain-${row.Question.alias}" style="border-bottom: 1px solid #E1E8ED; position:relative; padding: 0px 6px 0px 0px">
+          <tal:if condition="exists:row.Qvote.downvote">	
+          <meta class="questiondata" question="${row.Question.alias}" count="${row.Question.qkarma}" upvoted="${row.Qvote.upvote}" downvoted="${row.Qvote.downvote}" />
+           </tal:if>
+          <tal:if condition="not:exists:row.Qvote.downvote">
+          <meta class="questiondata" question="${row.Question.alias}" count="${row.Question.qkarma}" />
+          </tal:if>
+          <div id="questionboxmain-${row.Question.alias}">
+          <a href="/${row.Question.askedtoalias}/${row.Question.alias}">
+            <span class="questionbox"></span>
+          </a>
+            <div class="container span1">
+              <tal:if condition="logged_in">
+                <div id="${row.Question.alias}" class="upvote" style="margin:12px 0px 0px 0px;">
+                  <a class="upvote questionboxover"></a>
+                  <span class="count questionboxover" style="margin: 3px 0px 3px 0px;">${row.Question.qkarma}</span>
+                  <a class="downvote questionboxover"></a>
+                </div>
+              </tal:if>
+              <tal:if condition="not:logged_in">
+                <div id="${row.Question.alias}" class="upvote questionboxover" style="margin: 12px 0px 3px 0px;">
+                  <a class="upvote questionboxover" data-toggle="modal" data-target="#signInModal"></a>
+                  <span class="count questionboxover" style="margin: 3px 0px 3px 0px;">${row.Question.qkarma}</span>
+                  <a class="downvote questionboxover" data-toggle="modal" data-target="#signInModal"></a>
+                </div>
+              </tal:if>
+            </div>
+          <div class="container span8 offset1">
+            <p>
+              <a href="/${row.Question.askedbyalias}">
+                <img class="questionboxover" src="${request.static_url('atv:static/miniprofileimg/')}${row.Images.profilepic}" style="margin:7px 5px 3px 5px; z-index:2; height:20px; border-radius: 3px;">
+              </a>
+              <a href="/${row.Question.askedbyalias}" style="font-size:11px;" class="underlying questionboxover">
+                ${row.Question.askedbyname} (${row.Question.askedby})
+              </a>
+              <span style="font-size:11px; margin: 0px 5px;" class="">asked</span>
+               <a href="/${row.Question.askedtoalias}" style="font-size:11px;" class="underlying questionboxover">
+              	 ${row.Question.askedto}
+              </a>
+              <a href="/${row.Question.askedtoalias}/${row.Question.alias}" style="color: #333;" class="questionboxover">
+              <h4 style="margin:0px 0px 12px 10px; padding:0px; font-weight:normal; line-height:18px;">
+                  ${row.Question.questionmain}
+              </h4>
+              </a>
+              <div style="">
+                <p id="toolbar-${row.Question.alias}" style="font-size:20px; margin-top:5px;">
+                  <tal:if condition="row.Question.answered">
+                    <i class="icon-comments questionboxover"  style="margin:4px 0px 0px 10px; color:#01DF01;" title="Question answered" ></i>
+                  </tal:if>
+                  <tal:if condition="not: row.Question.answered">
+                    <i class="icon-comments questionboxover"  style="margin:4px 0px 0px 10px; color:#FF0000;" title="Question not answered yet" ></i>
+                  </tal:if>
+                  <tal:if condition="logged_in">       
+                      <tal:if condition="not:row.Question.answered">
+                        <a class="answerbutton"  data-toggle="modal" onclick='uploadTag("${row.Question.askedby}", "${row.Question.askedto}", "${row.Question.questionmain}", "${row.Question.alias}");' data-target="#uploadModal" style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Upload answer" >
+                          <i class="icon-white icon-upload-alt questionboxover"></i>
+                        </a>
+                        <a class="answerbutton" data-toggle="modal" onclick='uploadTag("${row.Question.askedby}", "${row.Question.askedto}", "${row.Question.questionmain}", "${row.Question.alias}");' data-target="#embedModal" style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Embed answer from Youtube" >
+                          <i class="icon-white icon-youtube questionboxover"></i>
+                        </a>
+                      </tal:if>
+                    <tal:if condition="python: row.Question.askedbyalias == logged_in_alias">
+                      <a class="answerbutton" data-toggle="modal" onclick='deleteQuestion("${row.Question.alias}", false);'  style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Delete question">
+                        <i class="icon-trash questionboxover"></i>
+                      </a>
+                    </tal:if>
+                  </tal:if>
+                </p>
+              </div>
+            </div>
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="container span9" style="border-bottom: 1px solid #E1E8ED; padding: 0px 0px 0px 0px">
+        <div class="paginationcontainer container span9" style="margin:0 auto; float:none;">
+          <div class="pull-right" style="margin: 15px 15px 15px 0px">
+            <a href="${request.application_url}/explore/trending">See all</a>
+          </div>
+        </div>
+      </div>
+	  </div>
+	 
+	  <div class="container well span3 offset 9" id="hotchannels" style="margin:0px 0px 0px 10px; padding: 0px 0px 0px 0px;">
+    <div>
+      <div style="border-bottom: 1px solid #E1E8ED; padding: 0px 0px 10px 0px;">
+        <h4 style="line-height:22px; font-weight:strong; margin:10px 10px 10px 10px; font-family: Gotham Narrow SSm, sans-serif;">Hot Channels</h4>
+        <div tal:repeat="row hotchannels">
+        	<a href="${request.application_url}/${row.Channel.usralias}"><img style="margin:0px 10px 5px 10px; z-index:2; height:20px; border-radius: 3px;" src="${request.static_url('atv:static/miniprofileimg/')}${row.Images.profilepic}"/>${row.Channel.username}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+   <div class="container well span3 offset 9" id="latestchannels" style="margin:10px 0px 0px 10px; padding: 0px 0px 0px 0px;">
+    <div>
+      <div style="border-bottom: 1px solid #E1E8ED; padding: 10px 0px 10px 0px;">
+        <h4 style="line-height:22px; font-weight:strong; margin:0px 10px 10px 10px; font-family: Gotham Narrow SSm, sans-serif;">Latest Channels</h4>
+        <div tal:repeat="row latestchannels">
+        	<a href="${request.application_url}/${row.Channel.usralias}"><img style="margin:0px 10px 5px 10px; z-index:2; height:20px; border-radius: 3px;" src="${request.static_url('atv:static/miniprofileimg/')}${row.Images.profilepic}"/>${row.Channel.username}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container well span3" style="margin:10px 0px 0px 10px; padding: 0px 0px 0px 0px;">
+            <div class="footer-links" style="margin:10px 10px 10px 10px">
+              <span>&copy; 2013 answer.tv </span>
+              <a href="/help">Help</a>
+              <a href="/blog">Blog</a>
+              <a href="/copyright">Copyright</a>
+              <a href="/terms">Terms</a>
+              <a href="/privacy">Privacy</a>
+              <a href="/contact">Contact</a>
+            </div>
+          <div style="margin:10px 10px 10px 10px">
+              <a href="http://www.facebook.com/answertv" style="text-decoration:none;">
+                <img src="${request.static_url('atv:static/img/facebookfooter.png')}">
+								</a>
+              <a href="http://twitter.com/answerdottv" style="margin-left:13px; text-decoration:none;">
+                <img src="${request.static_url('atv:static/img/twitterfooter.png')}">
+								</a>
+          </div>
+  </div>
+	  <div class="container-fluid well span9" id ="hoverquestion" style="margin:0px 0px 10px 0px; padding: 0px 6px 0px 0px;">
+      <div class="container-header">
+       <div class="span3">
+          <h2 style="color: #66757F; margin-left:0px; float:left; font-size: 22px; font-weight: 300; line-height: 22px;">
+            Latest
+          </h2>
+            <img id="loading" style="float:left; display: none; margin: 16px 0px 0px 9px;" src="${request.static_url('atv:static/img/loader.gif')}"/>
+        </div>
+      </div>
+      <div style="border-bottom: 1px solid #E1E8ED; width:100%; padding: 40px 6px 5px 0px"> 
+      </div>
+      <div id="livequestioncontainer">
+      <div tal:repeat="row latestlist">
+        <div class="container span9 questionboxmain" id="questionboxmain-${row.Question.alias}" style="border-bottom: 1px solid #E1E8ED; position:relative; padding: 0px 6px 0px 0px">
+          <tal:if condition="exists:row.Qvote.downvote">	
+          <meta class="questiondata" question="${row.Question.alias}" count="${row.Question.qkarma}" upvoted="${row.Qvote.upvote}" downvoted="${row.Qvote.downvote}" />
+           </tal:if>
+          <tal:if condition="not:exists:row.Qvote.downvote">
+          <meta class="questiondata" question="${row.Question.alias}" count="${row.Question.qkarma}" />
+          </tal:if>
+          <div id="questionboxmain-${row.Question.alias}">
+          <a href="/${row.Question.askedtoalias}/${row.Question.alias}">
+            <span class="questionbox"></span>
+          </a>
+            <div class="container span1">
+              <tal:if condition="logged_in">
+                <div id="${row.Question.alias}" class="upvote" style="margin:12px 0px 0px 0px;">
+                  <a class="upvote questionboxover"></a>
+                  <span class="count questionboxover" style="margin: 3px 0px 3px 0px;">${row.Question.qkarma}</span>
+                  <a class="downvote questionboxover"></a>
+                </div>
+              </tal:if>
+              <tal:if condition="not:logged_in">
+                <div id="${row.Question.alias}" class="upvote questionboxover" style="margin: 12px 0px 3px 0px;">
+                  <a class="upvote questionboxover" data-toggle="modal" data-target="#signInModal"></a>
+                  <span class="count questionboxover" style="margin: 3px 0px 3px 0px;">${row.Question.qkarma}</span>
+                  <a class="downvote questionboxover" data-toggle="modal" data-target="#signInModal"></a>
+                </div>
+              </tal:if>
+            </div>
+          <div class="container span8 offset1">
+            <p>
+              <a href="/${row.Question.askedbyalias}">
+                <img class="questionboxover" src="${request.static_url('atv:static/miniprofileimg/')}${row.Images.profilepic}" style="margin:7px 5px 3px 5px; z-index:2; height:20px; border-radius: 3px;">
+              </a>
+              <a href="/${row.Question.askedbyalias}" style="font-size:11px;" class="underlying questionboxover">
+                ${row.Question.askedbyname} (${row.Question.askedby})
+              </a>
+              <span style="font-size:11px; margin: 0px 5px;" class="">asked</span>
+               <a href="/${row.Question.askedtoalias}" style="font-size:11px;" class="underlying questionboxover">
+              	 ${row.Question.askedto}
+              </a>
+              <a href="/${row.Question.askedtoalias}/${row.Question.alias}" style="color: #333;" class="questionboxover">
+              <h4 style="margin:0px 0px 12px 10px; padding:0px; font-weight:normal; line-height:18px;">
+                  ${row.Question.questionmain}
+              </h4>
+              </a>
+              <div style="">
+                <p id="toolbar-${row.Question.alias}" style="font-size:20px; margin-top:5px;">
+                  <tal:if condition="row.Question.answered">
+                    <i class="icon-comments questionboxover"  style="margin:4px 0px 0px 10px; color:#01DF01;" title="Question answered" ></i>
+                  </tal:if>
+                  <tal:if condition="not: row.Question.answered">
+                    <i class="icon-comments questionboxover"  style="margin:4px 0px 0px 10px; color:#FF0000;" title="Question not answered yet" ></i>
+                  </tal:if>
+                  <tal:if condition="logged_in">       
+                      <tal:if condition="not:row.Question.answered">
+                        <a class="answerbutton"  data-toggle="modal" onclick='uploadTag("${row.Question.askedby}", "${row.Question.askedto}", "${row.Question.questionmain}", "${row.Question.alias}");' data-target="#uploadModal" style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Upload answer" >
+                          <i class="icon-white icon-upload-alt questionboxover"></i>
+                        </a>
+                        <a class="answerbutton" data-toggle="modal" onclick='uploadTag("${row.Question.askedby}", "${row.Question.askedto}", "${row.Question.questionmain}", "${row.Question.alias}");' data-target="#embedModal" style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Embed answer from Youtube" >
+                          <i class="icon-white icon-youtube questionboxover"></i>
+                        </a>
+                      </tal:if>
+                    <tal:if condition="python: row.Question.askedbyalias == logged_in_alias">
+                      <a class="answerbutton" data-toggle="modal" onclick='deleteQuestion("${row.Question.alias}", false);'  style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Delete question">
+                        <i class="icon-trash questionboxover"></i>
+                      </a>
+                    </tal:if>
+                  </tal:if>
+                </p>
+              </div>
+            </div>
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="container span9" style="border-bottom: 1px solid #E1E8ED; padding: 0px 0px 0px 0px">
+        <div class="paginationcontainer container span9" style="margin:0 auto; float:none;">
+          <div class="pull-right" style="margin: 15px 15px 15px 0px">
+            <a href="${request.application_url}/explore/latest">See all</a>
+          </div>
+        </div>
+      </div>
+	  </div>	 
+	 	  <div class="container-fluid well span9" id ="hoverquestion" style="margin:0px 0px 10px 0px; padding: 0px 6px 0px 0px;">
+      <div class="container-header">
+       <div class="span3">
+          <h2 style="color: #66757F; margin-left:0px; float:left; font-size: 22px; font-weight: 300; line-height: 22px;">
+            Our Picks
+          </h2>
+            <img id="loading" style="float:left; display: none; margin: 16px 0px 0px 9px;" src="${request.static_url('atv:static/img/loader.gif')}"/>
+        </div>
+      </div>
+      <div style="border-bottom: 1px solid #E1E8ED; width:100%; padding: 40px 6px 5px 0px"> 
+      </div>
+      <div id="livequestioncontainer">
+      <div tal:repeat="row ourpicklist">
+        <div class="container span9 questionboxmain" id="questionboxmain-${row.Question.alias}" style="border-bottom: 1px solid #E1E8ED; position:relative; padding: 0px 6px 0px 0px">
+          <tal:if condition="exists:row.Qvote.downvote">	
+          <meta class="questiondata" question="${row.Question.alias}" count="${row.Question.qkarma}" upvoted="${row.Qvote.upvote}" downvoted="${row.Qvote.downvote}" />
+           </tal:if>
+          <tal:if condition="not:exists:row.Qvote.downvote">
+          <meta class="questiondata" question="${row.Question.alias}" count="${row.Question.qkarma}" />
+          </tal:if>
+          <div id="questionboxmain-${row.Question.alias}">
+          <a href="/${row.Question.askedtoalias}/${row.Question.alias}">
+            <span class="questionbox"></span>
+          </a>
+            <div class="container span1">
+              <tal:if condition="logged_in">
+                <div id="${row.Question.alias}" class="upvote" style="margin:12px 0px 0px 0px;">
+                  <a class="upvote questionboxover"></a>
+                  <span class="count questionboxover" style="margin: 3px 0px 3px 0px;">${row.Question.qkarma}</span>
+                  <a class="downvote questionboxover"></a>
+                </div>
+              </tal:if>
+              <tal:if condition="not:logged_in">
+                <div id="${row.Question.alias}" class="upvote questionboxover" style="margin: 12px 0px 3px 0px;">
+                  <a class="upvote questionboxover" data-toggle="modal" data-target="#signInModal"></a>
+                  <span class="count questionboxover" style="margin: 3px 0px 3px 0px;">${row.Question.qkarma}</span>
+                  <a class="downvote questionboxover" data-toggle="modal" data-target="#signInModal"></a>
+                </div>
+              </tal:if>
+            </div>
+          <div class="container span8 offset1">
+            <p>
+              <a href="/${row.Question.askedbyalias}">
+                <img class="questionboxover" src="${request.static_url('atv:static/miniprofileimg/')}${row.Images.profilepic}" style="margin:7px 5px 3px 5px; z-index:2; height:20px; border-radius: 3px;">
+              </a>
+              <a href="/${row.Question.askedbyalias}" style="font-size:11px;" class="underlying questionboxover">
+                ${row.Question.askedbyname} (${row.Question.askedby})
+              </a>
+              <span style="font-size:11px; margin: 0px 5px;" class="">asked</span>
+               <a href="/${row.Question.askedtoalias}" style="font-size:11px;" class="underlying questionboxover">
+              	 ${row.Question.askedto}
+              </a>
+              <a href="/${row.Question.askedtoalias}/${row.Question.alias}" style="color: #333;" class="questionboxover">
+              <h4 style="margin:0px 0px 12px 10px; padding:0px; font-weight:normal; line-height:18px;">
+                  ${row.Question.questionmain}
+              </h4>
+              </a>
+              <div style="">
+                <p id="toolbar-${row.Question.alias}" style="font-size:20px; margin-top:5px;">
+                  <tal:if condition="row.Question.answered">
+                    <i class="icon-comments questionboxover"  style="margin:4px 0px 0px 10px; color:#01DF01;" title="Question answered" ></i>
+                  </tal:if>
+                  <tal:if condition="not: row.Question.answered">
+                    <i class="icon-comments questionboxover"  style="margin:4px 0px 0px 10px; color:#FF0000;" title="Question not answered yet" ></i>
+                  </tal:if>
+                  <tal:if condition="logged_in">       
+                      <tal:if condition="not:row.Question.answered">
+                        <a class="answerbutton"  data-toggle="modal" onclick='uploadTag("${row.Question.askedby}", "${row.Question.askedto}", "${row.Question.questionmain}", "${row.Question.alias}");' data-target="#uploadModal" style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Upload answer" >
+                          <i class="icon-white icon-upload-alt questionboxover"></i>
+                        </a>
+                        <a class="answerbutton" data-toggle="modal" onclick='uploadTag("${row.Question.askedby}", "${row.Question.askedto}", "${row.Question.questionmain}", "${row.Question.alias}");' data-target="#embedModal" style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Embed answer from Youtube" >
+                          <i class="icon-white icon-youtube questionboxover"></i>
+                        </a>
+                      </tal:if>
+                    <tal:if condition="python: row.Question.askedbyalias == logged_in_alias">
+                      <a class="answerbutton" data-toggle="modal" onclick='deleteQuestion("${row.Question.alias}", false);'  style="margin-left:20px; cursor: pointer; color:#CCD6DD;" title="Delete question">
+                        <i class="icon-trash questionboxover"></i>
+                      </a>
+                    </tal:if>
+                  </tal:if>
+                </p>
+              </div>
+            </div>
+            </div>
+          </div>
+      </div>
+      </div>
+      <div class="container span9" style="border-bottom: 1px solid #E1E8ED; padding: 0px 0px 0px 0px">
+        <div class="paginationcontainer container span9" style="margin:0 auto; float:none;">
+          <div class="pull-right" style="margin: 15px 15px 15px 0px">
+            <a href="${request.application_url}/explore/ourpicks">See all</a>
+          </div>
+        </div>
+      </div>
+	  </div>
+    <div metal:fill-slot="popups">
+      <body style="background-color:#eeeff4; fixed top left;" >
+    </div>
+    </div>
+</div>
+ <div class="container well span3" style="margin:10px 0px 0px 10px; padding: 0px 0px 0px 0px;">
+            <div class="footer-links" style="margin:10px 10px 10px 10px">
+              <span>&copy; 2013 answer.tv </span>
+              <a href="/help">Help</a>
+              <a href="/blog">Blog</a>
+              <a href="/copyright">Copyright</a>
+              <a href="/terms">Terms</a>
+              <a href="/privacy">Privacy</a>
+              <a href="/contact">Contact</a>
+            </div>
+          <div style="margin:10px 10px 10px 10px">
+              <a href="http://www.facebook.com/answertv" style="text-decoration:none;">
+                <img src="${request.static_url('atv:static/img/facebookfooter.png')}">
+								</a>
+              <a href="http://twitter.com/answerdottv" style="margin-left:13px; text-decoration:none;">
+                <img src="${request.static_url('atv:static/img/twitterfooter.png')}">
+								</a>
+          </div>
+  </div>
+</metal:main>

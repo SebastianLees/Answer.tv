@@ -1,0 +1,22 @@
+<metal:main use-macro="load: base2.pt">
+<div metal:fill-slot="title"><title>Page not found | answer.tv</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content="Page not found."/>
+</div>
+<div metal:fill-slot="body">
+	<body style="background-color:#eeeff4; fixed top left;">
+</div>
+<div metal:fill-slot="content">
+	<div class="container-fluid span9" style="margin:0 auto; float:none;">
+	<br>
+	<p><h3>Page not found</h3><p>
+	<br>
+	<p><img src="${request.static_url('atv:static/img/testcard.png')}" border="0"></p>
+	<br>
+	<p><h5 style="font-weight:normal;">Oops! The page you were looking for could not be found. This is known as a <b>'404 error'</b> (we're not sure what the other 403 errors are).</h5></p>
+	<p><h5 style="font-weight:normal;">It may be that the address was not entered correctly, or is out of date (or it could be a technical issue our end).</h5></p>
+	<p><h5>Try using the search box above or visiting our <a href="/help" style="text-decoration:none;">help page</h5></p>	
+	</div>
+  
+</div>
+</metal:main> 

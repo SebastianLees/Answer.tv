@@ -1,0 +1,85 @@
+<metal:main use-macro="load: base2.pt">
+<div metal:fill-slot="title"><title>Content & copyright policy - answer.tv</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content="Content & copyright policy for answer.tv"/>
+</div>
+<div metal:fill-slot="body">
+  <body style="background-color:#eeeff4; fixed top left;" >
+</div>
+<div metal:fill-slot="content">
+  <div id="content" class="container-fluid well span12" style="margin:0 auto; float:none; margin-bottom:8px;">
+    <div style="margin: 10px 10px 10px 10px;">
+      <h2 style="color: #66757F; margin: 15px 0px 0px 0px; font-size: 22px; font-weight: 300; line-height: 22px;">Copyright & Content Policy</h2>
+      <br>
+        <p>
+          Answer.tv respects the intellectual property rights of others, and requests you to do the same. Answer.tv does not
+          permit copyright infringing activities and infringement of intellectual property rights on its web site or related services,
+          and answer.tv will remove all Content if properly notified that such Content infringes another's intellectual property rights.
+          answer.tv reserves the right to remove Content without prior notice. Answer.tv will also terminate a User's account if the
+          User is determined to be a repeat infringer of copyright. Answer.tv may remove such Content and/or terminate a User's account
+          due to a violation of these Terms & Conditions at any time, without prior notice and at its sole discretion.
+        </p>
+
+        <p>
+          If you believe that your Content has been copied in a way that constitutes copyright infringement, please provide answer.tv's
+          Copyright Agent the following information:
+        </p>
+        <br>
+          <p>
+            <ul>
+              <li>A physical or electronic signature of a person authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</li>
+              <p></p>
+              <li>Identification of the copyrighted work claimed to have been infringed, or, if multiple copyrighted works at a single online site are covered by a single notification, a representative list of such works at that site.</li>
+              <p></p>
+              <li>Identification of the material that is claimed to be infringing or to be the subject of infringing activity and that is to be removed or access to which is to be disabled, and information reasonably sufficient to permit the service provider to locate the material. Providing URLs in an email enables us to most efficiently locate and remove the infringing material.</li>
+              <p></p>
+              <li>Information reasonably sufficient to permit the service provider to contact the complaining party, such as an address, telephone number, and, if available, an electronic mail address at which the complaining party may be contacted.</li>
+              <p></p>
+              <li>A statement that the complaining party has a good faith belief that use of the material in the manner complained of is not authorized by the copyright owner, its agent, or the law.</li>
+              <p></p>
+              <li>A statement that the information in the notification is accurate, and under penalty of perjury, that the complaining party is authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</li>
+            </ul>
+          </p>
+          <p></p>
+          <br>
+            <p>
+              Answer.tv's Copyright Agent for Notice of claims of copyright infringement can be reached as follows:
+            </p>
+            <p>
+              <p>By mail: Copyright Agent, Incerto, 3rd Floor, 86-90 Paul Street, London, UK, EC2A 4NE</p>
+              <p>By email: <a href="/contact">Contact us</a></p>
+            </p>
+            <p>Please also note that under Section 512(f) of the US Copyright Act any person who knowingly materially misrepresents that material or activity is infringing may be subject to liability.</p>
+            <br>
+		</div>
+	</div>
+  <div class="footer-static-page">
+    <div class="container">
+      <div class="row">
+        <div class="span10">
+          <div class="footer-links">
+            <span> </span>
+            <a href="/help">Help</a>
+            <a href="/blog">Blog</a>
+            <a href="/copyright">Copyright & Content</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/contact">Contact Us</a>
+          </div>
+          <div class="footer-disclaimer">&copy; 2013 answer.tv all rights reserved. Use of this site constitutes acceptance of our Privacy Policy and Terms of Service.</div>
+        </div>
+        <div class="span2 text-center footer-social-links" style="margin-top:3px;">
+          <div>
+            <a href="http://www.facebook.com/answertv" style="text-decoration:none;">
+              <img src="${request.static_url('atv:static/img/facebookfooter.png')}">
+								</a>
+            <a href="http://twitter.com/answerdottv" style="margin-left:13px; text-decoration:none;">
+              <img src="${request.static_url('atv:static/img/twitterfooter.png')}">
+								</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</metal:main>

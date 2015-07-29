@@ -1,0 +1,138 @@
+<metal:main use-macro="load: base.pt">
+<div metal:fill-slot="title"><title>Answer History - ${channelname.name} (${channelname.username}) on answer.tv</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content="Answer History - ${channelname.name} (${channelname.username}) on answer.tv"/>
+</div>
+<div metal:fill-slot="body">
+  <body style="background: url(${request.static_url('atv:static/permbks/')}${channelname.bkg}) fixed top left;">
+</div>
+<div metal:fill-slot="content">
+  <script>
+			function viewer(question, rank, title, embedcode, answeredBy, link)
+			{
+			document.getElementById('player').style.display='block';
+			document.getElementById('innerplayer').style.display='block';
+			$('#aTitle').html(title);
+			$('#videoFrame').html(embedcode);
+			$('#qTitle').html(question);
+			$('#ratevid').html(rank);
+			$('#answeredBy').html('<b><a href="http://www.answer.tv/' + answeredBy  + '"><img class="img-circle" style="margin:0px 5px 0px 0px; height:30px;" src="${request.static_url('atv:static/profileimg/')}' + answeredBy + '.png"> ' + answeredBy + '</a></b>');
+			$('#directLink').html('<b>answer.tv/v/' + link + '</b>');
+			$('#sharetags').html('<a style="cursor: pointer; cursor: hand;" onclick="window.open(\'http://www.facebook.com/sharer.php?u=http://www.answer.tv/v/'+link+'\', \'a\', \'width=500, height=230, scrollbars=0, resizable=0\')"><img src="${request.static_url('atv:static/img/facebook.png')}" style="margin-right:4px;"/></a><a style="cursor: pointer; cursor: hand;" onclick="window.open(\'http://twitter.com/share?url=http://www.answer.tv/v/'+link+'&text='+question+' \', \'a\', \'width=500, height=230, scrollbars=0, resizable=0\')"><img src="${request.static_url('atv:static/img/twitter.png')}" style="margin-right:4px;"/></a><a style="cursor: pointer; cursor: hand;" onclick="window.open(\'https://plus.google.com/share?url=http://www.answer.tv/v'+  link +'\', \'a\', \'width=500, height=230, scrollbars=0, resizable=0\')"><img src="${request.static_url('atv:static/img/gplus.png')}" style="margin-right:4px;"/></a><a href="http://reddit.com/submit?url=http://www.answer.tv/v/' + link + '&title=' + question + '" target="_blank"><img src="${request.static_url('atv:static/img/reddit.png')}"/></a>');
+			}
+			
+			function childCallback(event) {
+    			event.stopImmediatePropagation();
+    			return false;
+			}
+      
+			function viewerClose()
+			{
+			document.getElementById('player').style.display='none';
+			document.getElementById('innerplayer').style.display='none';
+			}
+			
+			function viewerNext()
+			{
+			$("#aTitle").fadeOut(300);
+			$("#qTitle").fadeOut(300);
+			$("#ratevid").fadeOut(300);
+			$("#videoFrame").fadeOut(300);
+			$("#vidDetails").fadeOut(300);
+			$("#thumnail").click(); 	
+			$("#vidDetails").fadeIn(300);
+			$("#videoFrame").fadeIn(300);
+			$("#ratevid").fadeIn(300);
+			$("#qTitle").fadeIn(300);
+			$("#aTitle").fadeIn(300);
+			
+			}
+	</script>
+	<tal:if condition="logged_in">
+	<div id="notificationsBar">
+		<tal:block repeat="item notifications">
+		<div class="alert alert-success alert-dismissable span12" id="1" style="margin:0 auto; float:none;">
+			<button type="button" class="close" data-dismiss="alert" id="1delete" onclick="trimID('${item}')" aria-hidden="true">&times;</button>
+	  		<b>${item}</b>
+		</div>
+		<div style="margin-top:5px;">
+		</div>
+		</tal:block>	
+	</div>
+	</tal:if>
+	<div class="sortingbar span12" style="margin:0 auto; float:none; line-height:10px; height:43px;"><!--/#sorting bar-->	
+		<div class="dropdown" style="float:left;">
+			<a href="${request.application_url}/${channelname.usralias}/history"><button class="btn btn-mini" style="margin-right:5px;">Questions</button></a>
+			<a href="${request.application_url}/${channelname.usralias}/history/a"><button class="btn btn-mini btn-success" style="margin-right:5px;"><b>Answers</b></button></a>
+		</div>
+		<div style="float:right;">
+			<p class="sortingBar well" style="margin:0px; padding:3px 5px 3px 5px;"><img src="${request.static_url('atv:static/profileimg/')}${channelname.profileimg}" class="img-circle" style="margin:0px 5px 0px 0px; height:30px;"><a href="${request.application_url}/${channelname.usralias}">${channelname.name} (${channelname.username})</a></p>
+		</div>
+	</div><!--/#sorting bar end-->
+	<div id="bkimg">
+	<img src="${request.static_url('atv:static/permbkimgs/')}${channelname.bkgimg}" style="position:fixed; left:0px; top:40px; z-index:-1;"/>
+	</div>
+	<div>
+    <div class="container-fluid well" style="margin-top:6px; margin-bottom:15px;">
+      <div class="container-fluid span11" style="margin-top:6px;">
+        <div tal:repeat="row answerlist">
+          <a  href="javascript:viewer('${row.questiontext}', '${row.akarma}', '${row.answertext}', '${row.embedcode}', '${row.answeredby}', '${row.link}' )">
+            <img src="${request.static_url('atv:static/vthumbs/')}${row.thumbpath}" class="vidimg" id="vidimg" height="90px" width="160px" style="margin: 10px 5px 10px 5px; float:left;">
+			  </a>
+        </div>
+      </div>
+      <div class="paginationcontainer container span12" style="margin:0 auto; float:none;">
+        <div class="pull-right" style="margin: 15px 0px">
+          ${answerlist.pager(format="$link_first $link_previous ~3~ $link_next $link_last", link_attr={'class':'btn btn-default'}, curpage_attr={'class':'btn btn-info disabled'})}
+        </div>
+      </div>
+    </div>
+	</div>
+
+	<script>
+	// The rel attribute is the userID you would want to follow
+	$('button.followButton').live('click', function(e){
+    	e.preventDefault();
+    	$button = $(this);
+    	if($button.hasClass('following')){
+        
+        	//$.ajax(); Do Unfollow
+        
+        	$button.removeClass('following');
+        	$button.removeClass('unfollow');
+        	$button.html('<span class="icon-white icon-heart"></span> follow');
+        	$.post("/2x4b32cp",
+  			{
+   	 		following:"${channelname.username}",
+    		followunfollow:"unfollow"
+  			});
+    		}
+    	else {
+        
+        // $.ajax(); Do Follow
+        
+        $button.addClass('following');
+        $button.text('following');
+        $.post("/2x4b32cp",
+  			{
+   	 		following:"${channelname.username}",
+    		followunfollow:"follow"
+  			});
+    		}
+	});
+
+	$('button.followButton').hover(function(){
+    	$button = $(this);
+    	if($button.hasClass('following')){
+        	$button.addClass('unfollow');
+        	$button.text('unfollow');
+    	}
+	}, function(){
+    if($button.hasClass('following')){
+        $button.removeClass('unfollow');
+        $button.text('following');
+    	}
+	});
+</script>
+</div>
+</metal:main>

@@ -1,0 +1,118 @@
+<metal:main use-macro="load: base3.pt">
+<div metal:fill-slot="title"><title>${linkmatch.answertext} | answer.tv</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content='{linkmatch.answeredby} responds "${linkmatch.answertext}" to the question, "${linkmatch.questiontext}".'/>
+</div>
+<div metal:fill-slot="body">
+  <body style="background-color:#eeeff4; fixed top left;" >
+</div>
+<div metal:fill-slot="header">
+<!-- for Facebook -->          
+<meta property="og:title" content="${linkmatch.questiontext}" />
+<meta property="og:type" content="video" />
+<meta property="og:image" content="${request.static_url('atv:static/img/tileicon.png')}" />
+<meta property="og:url" content="http://www.answer.tv/v/${linkmatch.link}" />
+<meta property="og:description" content="${linkmatch.answertext}" />
+</div>
+<div metal:fill-slot="content">
+<body onLoad="javascript:singleviewer('${linkmatch.embedcode}')">
+	<script>
+	function singleviewer(embedcode)
+			{
+			$('#singlevideoFrame').html(embedcode);
+			}
+	</script>
+	<div id="player" style="display:block; position: absolute; margin-top:70px;">
+    <div class="span12" style="margin:0 auto; float:none;">
+      <div class="span12" style="background-color:white; margin-left:0px; -moz-opacity: 0.95; opacity:.95;filter: alpha(opacity=95); -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; ">
+        <div class="span9" style="margin:5px 5px 5px 5px; background-color:black; -moz-opacity: 0.95; opacity:.95;filter: alpha(opacity=95); -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; ">
+          <table align="center">
+            <tbody>
+              <tr>
+                <td>
+                  <p align="center" id="qTitle" class="qTitle" style="color:white; font-size:18px; margin-top:5px;">
+                    <a id="qlink" class="qlink" href="http://www.answer.tv/${linkmatch.channel}/${linkmatch.question}" style="color:#fff;">${linkmatch.questiontext}</a>
+                  </p>
+                  <p align="center" id="aTitle" class="aTitle" style="color:white; font-size:16px;">${linkmatch.answertext}</p>
+                  <div id="singlevideoFrame" class="singlevideoFrame"></div>
+                  <tal:if condition="logged_in">
+                    <p align="center" style="margin-top:15px;">
+                      <span id="videoRating" class="videoRating well" style="margin:5px 0px 20px 0px; padding:10px 5px 10px 5px;">
+                        <a class="vote">
+                          <img hand=""; src="${request.static_url('atv:static/img/upvote_off.png')}" name="up" style=" cursor: pointer; cursor: hand; margin-right:5px;"  onmouseover="this.src='${request.static_url('atv:static/img/upvote_on.png')}'" onmouseout="this.src='${request.static_url('atv:static/img/upvote_off.png')}'">
+												</a>
+                        <span id="ratevid" class="ratevid">
+                          ${linkmatch.akarma}
+                        </span>
+                        <a align="center" class="vote">
+                          <img src="${request.static_url('atv:static/img/downvote_off.png')}" style=" cursor: pointer; cursor: hand; margin-left:5px;" name="down"  onmouseover="this.src='${request.static_url('atv:static/img/downvote_on.png')}'" onmouseout="this.src='${request.static_url('atv:static/img/downvote_off.png')}'">
+												</a>
+                      </span>
+                    </p>
+                  </tal:if>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="span3" style="margin:5px 5px 5px 5px; height:100%;">
+          <p class="profileTags">Answered by:</p>
+          <p id="answeredBy" class="answeredBy">
+            <a href="http://www.answer.tv/${linkmatch.answeredby}">
+              <img class="img-circle" style="margin:0px 5px 0px 0px; height:30px;" src="${request.static_url('atv:static/profileimg/')}${linkmatch.answeredby}.png">
+                <b> ${linkmatch.answeredby}</b>
+            </a>
+          </p>
+          <p class="profileTags">Direct link:</p>
+          <p id="directLink" class="directLink">
+            <b>answer.tv/v/${linkmatch.link}</b>
+          </p>
+          <p class="profileTags">Share:</p>
+          <p>
+            <a style="cursor: pointer; cursor: hand;" onclick="window.open('http://www.facebook.com/sharer.php?u=http://www.answer.tv/v/${linkmatch.link}', 'a', 'width=500, height=200, scrollbars=0, resizable=0')">
+              <img src="${request.static_url('atv:static/img/facebook.png')}"/>
+            </a>
+            <a style="cursor: pointer; cursor: hand;" onclick="window.open('http://twitter.com/share?url=http://www.answer.tv/v/${linkmatch.link}&text=${linkmatch.questiontext}', 'a', 'width=500, height=230, scrollbars=0, resizable=0')">
+              <img src="${request.static_url('atv:static/img/twitter.png')}"/>
+            </a>
+            <a style="cursor: pointer; cursor: hand;" onclick="window.open('https://plus.google.com/share?url=http://www.answer.tv/v/${linkmatch.link}', 'a', 'width=500, height=230, scrollbars=0, resizable=0')">
+              <img src="${request.static_url('atv:static/img/gplus.png')}"/>
+            </a>
+            <a href="http://reddit.com/submit?url=http://www.answer.tv/v/${linkmatch.link}&title=${linkmatch.questiontext}" target="_blank">
+              <img src="${request.static_url('atv:static/img/reddit.png')}"/>
+            </a>
+          </p>
+        </div>
+      </div>
+      <div class="footer-static-page" style="border:0px !important;">
+        <div class="container">
+          <div class="row">
+            <div class="span10">
+              <div class="footer-links">
+                <span> </span>
+                <a href="/help">Help</a>
+                <a href="/blog">Blog</a>
+                <a href="/copyright">Copyright & Content</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/contact">Contact Us</a>
+              </div>
+              <div class="footer-disclaimer">&copy; 2013 answer.tv all rights reserved. Use of this site constitutes acceptance of our Privacy Policy and Terms of Service.</div>
+            </div>
+            <div class="span2 text-center footer-social-links" style="margin-top:3px;">
+              <div>
+                <a href="http://www.facebook.com/answertv" style="text-decoration:none;">
+                  <img src="${request.static_url('atv:static/img/facebookfooter.png')}">
+								</a>
+                <a href="http://twitter.com/answerdottv" style="margin-left:13px; text-decoration:none;">
+                  <img src="${request.static_url('atv:static/img/twitterfooter.png')}">
+								</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+		</div><!-- /player modal -->
+</div>
+</metal:main> 

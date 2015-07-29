@@ -1,0 +1,11 @@
+pyramid
+SQLAlchemy
+transaction
+pyramid_tm
+pyramid_debugtoolbar
+zope.sqlalchemy
+waitress
+webhelpers
+pyramid_chameleon
+cherrypy
+pastescript

@@ -1,0 +1,201 @@
+<metal:main use-macro="load: base.pt">
+<div metal:fill-slot="title"><title>Edit profile</title>
+</div>
+<div metal:fill-slot="description"><meta name="description" content="Edit your answer.tv profile."/>
+</div>
+<div metal:fill-slot="headextra">
+</div> 
+  <div metal:fill-slot="content">
+    <body id="bkgchanger" style="background-color:#eeeff4;">
+      </body>
+    <script>
+      $( document ).ready(function() {
+      $('input:radio[name="privAsk"][value=${channelname.Channel.privAsk}]').prop('checked', true);
+      $('input:radio[name="privView"][value=${channelname.Channel.privView}]').prop('checked', true);
+      });
+    </script>
+	<div style="margin-bottom:10px;">
+	<div class="questioncontainer container well span12" style="margin:0 auto; float:none;">
+    <div class="span12" style="margin-bottom:20px;">
+      <h2 style="color: #66757F; margin: 15px 0px 0px 0px; font-size: 22px; font-weight: 300; line-height: 22px;">
+        Edit profile
+      </h2>
+    </div>
+    <div>
+      <div class="span12" style=" margin-left:0px; border-top: 1px solid #E1E8ED; margin-bottom:15px;">
+      </div>
+        <h4 style="font-weight:normal; text-align:left; margin-left:20px; "><i class="icon-user"></i> You</h4>
+      <hr></hr>
+    </div>
+		<div id="form">
+			<form action="${request.application_url}/i/edit" method="post" enctype="multipart/form-data">  
+				<div class="personal" style="margin-left:20px;">
+					<div id="preview">
+					<h6 style="font-weight:normal; margin: 0px 0px 10px 0px; color:red;">${profileError}</h6>
+					<img src="${request.static_url('atv:static/profileimg/')}${channelname.Images.profilepic}" width="150px" height="150px" style="margin:0px 0px 30px 30px; border-radius: 3px;" id="profileThumb">
+					<input type="file" accept="image/*" size="20" style="margin: 0px 0px 30px 20px" name="picupload" id="profileUpload" value="">
+					</div>
+					<label form="name">Name</label>
+					<h6 style="font-weight:normal; margin: 0px 0px; color:red;">${nameError}</h6>
+					<input type="text" class="form-control" id="inputName" name="name" value="${channelname.Channel.name}"  maxlength="30" style="width:30%;">
+					<label form="name">Location</label><h6 style="font-weight:normal; margin: 0px 0px; color:red;">${locationError}</h6>
+					<input type="text" class="form-control" id="inputLocation" name="location" value="${channelname.Channel.location}"  maxlength="25" style="width:30%;">
+					<label form="name">Website</label><h6 style="font-weight:normal; margin: 0px 0px; color:red;">${websiteError}</h6>
+                    <input type="text" class="form-control" id="inputWebsite" name="website" value="${channelname.Channel.url}" style="width:30%;"  maxlength="30">
+					<label form="name">A little about yourself...</label><h6 style="font-weight:normal; margin: 0px 0px; color:red;">${descError}</h6>
+					<p><textarea class="form-control" rows="3" style="width:40%;" name="bio" id="inputBio" maxlength="230">${channelname.Channel.description}</textarea></p>
+					<button type="submit" id="saver" data-loading-text="Save    <i class='icon-spinner icon-spin icon-large'></i>" name="form.submitted" class="btn btn btn-info" style="margin: 10px 0px;">Save</button>
+				</div>
+				<hr>
+				<h4 style="font-weight:normal; text-align:left; margin-left:20px;"><i class="icon-pencil"></i> Design</h4>
+				<hr>
+				<div class="lookandfeel" style="margin-left:20px;">
+          <p>
+            <label form="name">Background</label>
+          </p>
+          			<p><img id="bkpreviewbox" src="${request.static_url('atv:static/minipermbks/')}${channelname.Images.backgroundpic}" style="margin: 5px 5px 0px 0px;"/></p>
+          
+          <p style="margin-top:30px;">
+            <label form="name">Choose background</label>
+          </p>
+					<input type="hidden" class="form-control" id="inputBackground" name="background" value="${channelname.Images.backgroundpic}" style="width:30%;" required/>
+					<a href="javascript:changeBGImage('cars.png')"><img src="${request.static_url('atv:static/minipermbks/')}cars.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('birdbox.png')"><img src="${request.static_url('atv:static/minipermbks/')}birdbox.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('blueflower.png')"><img src="${request.static_url('atv:static/minipermbks/')}blueflower.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('cartographer.png')"><img src="${request.static_url('atv:static/minipermbks/')}cartographer.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('elastoplast.png')"><img src="${request.static_url('atv:static/minipermbks/')}elastoplast.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('fireheart.png')"><img src="${request.static_url('atv:static/minipermbks/')}fireheart.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('food.png')"><img src="${request.static_url('atv:static/minipermbks/')}food.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('glammer.png')"><img src="${request.static_url('atv:static/minipermbks/')}glammer.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('greyfloral.png')"><img src="${request.static_url('atv:static/minipermbks/')}greyfloral.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('knittednetting.png')"><img src="${request.static_url('atv:static/minipermbks/')}knittednetting.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('molten.png')"><img src="${request.static_url('atv:static/minipermbks/')}molten.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('norwegianrose.png')"><img src="${request.static_url('atv:static/minipermbks/')}norwegianrose.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('pineapple.png')"><img src="${request.static_url('atv:static/minipermbks/')}pineapple.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('purplecrown.png')"><img src="${request.static_url('atv:static/minipermbks/')}purplecrown.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('reddrop.png')"><img src="${request.static_url('atv:static/minipermbks/')}reddrop.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('redflower.png')"><img src="${request.static_url('atv:static/minipermbks/')}redflower.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('retroleaf.png')"><img src="${request.static_url('atv:static/minipermbks/')}retroleaf.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('seamless.png')"><img src="${request.static_url('atv:static/minipermbks/')}seamless.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('shattered.png')"><img src="${request.static_url('atv:static/minipermbks/')}shattered.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('stardust.png')"><img src="${request.static_url('atv:static/minipermbks/')}stardust.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('stripes.png')"><img src="${request.static_url('atv:static/minipermbks/')}stripes.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('whitebrick.png')"><img src="${request.static_url('atv:static/minipermbks/')}whitebrick.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('wood.png')"><img src="${request.static_url('atv:static/minipermbks/')}wood.png" style="margin: 5px 5px 0px 0px;"/></a>
+					<a href="javascript:changeBGImage('default.png')"><img src="${request.static_url('atv:static/minipermbks/')}default.png" style="margin: 5px 5px 0px 0px;"/></a>
+          <p style="margin-top:30px;">
+            <label form="name">Custom background</label>
+          </p>
+          <h6 style="font-weight:normal; margin: 0px 0px 10px 0px; color:red;">${custombkgError}</h6>
+          <a href="javascript:changeBGImage('${channelname.Channel.usralias}.png')">
+            <img id="customBKbox" src="${request.static_url('atv:static/minipermbks/')}${channelname.Images.backgroundpic}" style="margin: 5px 5px 0px 0px;"/>
+          </a>
+          <input type="file" accept="image/*" size="20" style="margin: 20px 0px 10px 20px" name="backgroundUpload" id="backgroundUpload" value="">
+          <p><button type="submit" id="saver2" data-loading-text="Save    <i class='icon-spinner icon-spin icon-large'></i>" name="form.submitted" class="btn btn btn-info" style="margin: 10px 0px;">Save</button></p>
+				</div>		
+				<hr>
+				<h4 style="font-weight:normal; text-align:left; margin-left:20px;"><i class="icon-key"></i> Privacy</h4>
+				<hr>
+				<div class="privacy" style="margin-left:20px;">
+          <p>
+            <label form="name" style="margin-top:20px;">Who can view your channel?</label>
+          </p>
+          <p>
+            <h6>
+              <i class="icon-globe" title="Public"></i>
+              <input type="radio" name="privView" value="public" style="margin-right:20px; margin-top:-2px;" />
+              <i class="icon-heart" title="People I'm following"></i>
+              <input type="radio" name="privView" value="following" style="margin-right:20px; margin-top:-2px;" />
+              <i class="icon-user" title="Just me"></i>
+              <input type="radio" name="privView" value="me" style="margin-right:20px; margin-top:-2px;"/>
+            </h6>
+          </p>
+          <p>
+            <label form="name" style="margin-top:20px;">Who can ask questions on your channel?</label>
+          </p>
+          <p>
+            <h6>
+              <i class="icon-globe" title="Public"></i>
+              <input type="radio" name="privAsk" value="public" style="margin-right:20px; margin-top:-2px;" />
+              <i class="icon-heart" title="People I'm following"></i>
+              <input type="radio" name="privAsk" value="following" style="margin-right:20px; margin-top:-2px;" />
+              <i class="icon-user" title="Just me"></i>
+              <input type="radio" name="privAsk" value="me" style="margin-right:20px; margin-top:-2px;"/>
+            </h6>
+          </p>
+					<p><button type="submit" id="saver3" data-loading-text="Save    <i class='icon-spinner icon-spin icon-large'></i>" name="form.submitted" class="btn btn btn-info" style="margin: 10px 0px;">Save</button></p>
+				</div>	
+				<hr>
+				<h4 style="font-weight:normal; text-align:left; margin-left:20px;"><i class="icon-wrench"></i> Account</h4>
+				<hr>
+				<div class="account" style="margin-left:20px;">
+					<p><a href="${request.application_url}/ereset"><button type="button" class="btn btn-alert">change email</button></a></p>
+					<p><a href="${request.application_url}/reset"><button type="button" class="btn btn-alert">reset password</button></a></p>
+				</div>	
+			</form>
+		</div>
+	</div>    
+	</div>
+    <div class="footer-static-page">
+      <div class="container">
+        <div class="row">
+          <div class="span10">
+            <div class="footer-links">
+              <span> </span>
+              <a href="/help">Help</a>
+              <a href="/blog">Blog</a>
+              <a href="/copyright">Copyright & Content</a>
+              <a href="/terms">Terms of Service</a>
+              <a href="/privacy">Privacy Policy</a>
+              <a href="/contact">Contact Us</a>
+            </div>
+            <div class="footer-disclaimer">&copy; 2013 answer.tv all rights reserved. Use of this site constitutes acceptance of our Privacy Policy and Terms of Service.</div>
+          </div>
+          <div class="span2 text-center footer-social-links" style="margin-top:3px;">
+            <div>
+              <a href="http://www.facebook.com/answertv" style="text-decoration:none;">
+                <img src="${request.static_url('atv:static/img/facebookfooter.png')}">
+								    </a>
+              <a href="http://twitter.com/answerdottv" style="margin-left:13px; text-decoration:none;">
+                <img src="${request.static_url('atv:static/img/twitterfooter.png')}">
+								    </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+    function changeBGImage(path){
+    $('#bkpreviewbox').attr('src',  '${request.static_url('atv:static/minipermbks/')}' + path);
+    $('#inputBackground').val(path);
+    }
+    </script>
+    <script>
+    $('#saver').on('click', function() {
+    var $this = $(this);
+    $this.button('loading');
+    setTimeout(function() {
+        $this.button('reset');
+    }, 40000);
+    });
+    </script>
+    <script>
+    $('#saver2').on('click', function() {
+    var $this = $(this);
+    $this.button('loading');
+    setTimeout(function() {
+        $this.button('reset');
+    }, 40000);
+    });
+    </script>
+    <script>
+    $('#saver3').on('click', function() {
+    var $this = $(this);
+    $this.button('loading');
+    setTimeout(function() {
+        $this.button('reset');
+    }, 40000);
+    });
+    </script>
+</div>
+</metal:main>

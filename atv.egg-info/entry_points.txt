@@ -1,0 +1,5 @@
+      [paste.app_factory]
+      main = atv:main
+      [console_scripts]
+      initialize_atv_db = atv.scripts.initializedb:main
+      
