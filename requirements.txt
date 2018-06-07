@@ -16,7 +16,7 @@ pyramid-tm==2.2
 repoze.lru==0.7
 repoze.tm2==2.1
 sqlalchemy==1.2.8
-transaction==1.4.3
+transaction==2.2.1
 translationstring==1.1
 venusian==1.0a8
 waitress==0.8.8
