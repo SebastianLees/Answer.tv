@@ -9,7 +9,7 @@ pastedeploy==1.5.2
 paster==0.8
 pygments==2.2.0
 pyramid==1.9.2
-pyramid-chameleon==0.1
+pyramid-chameleon==0.3
 pyramid-debugtoolbar==2.0.2
 pyramid-mako==1.0.1
 pyramid-tm==0.7
