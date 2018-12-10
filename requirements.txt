@@ -24,7 +24,7 @@ webob==1.8.4
 zope.deprecation==4.4.0
 zope.interface==4.6.0
 zope.sqlalchemy==1.0
-boto==2.48.0
+boto==2.49.0
 markerlib==0.6.0
 sqlalchemy-searchable==1.0.3
 sqlalchemy-utils==0.33.3
