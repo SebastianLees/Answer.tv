@@ -22,7 +22,7 @@ venusian==1.2.0
 waitress==1.2.0
 webob==1.8.5
 zope.deprecation==4.4.0
-zope.interface==4.5.0
+zope.interface==4.6.0
 zope.sqlalchemy==1.0
 boto==2.48.0
 markerlib==0.6.0
