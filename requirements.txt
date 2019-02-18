@@ -1,4 +1,4 @@
-chameleon==3.3
+chameleon==3.5
 coverage==4.5.1
 docutils==0.14
 mako==1.0.7
