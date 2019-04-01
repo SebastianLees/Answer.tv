@@ -33,5 +33,5 @@ unidecode==1.0.23
 recaptcha==1.0rc1
 python-slugify==3.0.2
 pastescript==3.1.0
-Pillow==5.1.0
+Pillow==5.4.1
 requests==2.18.4
