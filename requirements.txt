@@ -34,4 +34,4 @@ recaptcha==1.0rc1
 python-slugify==3.0.2
 pastescript==3.1.0
 Pillow==6.0.0
-requests==2.18.4
+requests==2.21.0
